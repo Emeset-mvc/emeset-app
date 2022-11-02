@@ -1,0 +1,14 @@
+{
+    "name": "emeset/emeset",
+    "description": "Estructura d'un projecte amb Emeset el framework per alumnes de DAW.",
+    "keywords": ["framework", "emeset", "DAW", "DAWM07"],
+    "license": "MIT",
+    "homepage": "https://github.com/Emeset-mvc",
+    "support": {
+        "issues": "https://github.com/laravel/emeset-app/issues",
+        "source": "https://github.com/Emeset-mvc/emeset-app"
+    },
+    "require": {
+        "emeset/framework": "^0.1.0"
+    }
+}
