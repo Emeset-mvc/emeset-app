@@ -29,7 +29,7 @@ include "../src/Middleware/test.php";
 
 
 /* Creem els diferents models */
-$contenidor = new \Emeset\Container($config);
+$contenidor = new \App\Container($config);
 
 $app = new \Emeset\Emeset($contenidor);
 
