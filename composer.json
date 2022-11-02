@@ -9,6 +9,6 @@
         "source": "https://github.com/Emeset-mvc/emeset-app"
     },
     "require": {
-        "emeset/framework": "^0.1.0"
+        "emeset/framework": "^0.1.1"
     }
 }

@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "224c0c4f6a9c79edb4d80d2cf1ec2c58",
+    "content-hash": "631d744c4fcef83f018c215522cc70ea",
     "packages": [
         {
             "name": "emeset/framework",
-            "version": "0.1",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Emeset-mvc/emeset.git",
-                "reference": "f34476e8e8439f8c6f903abde1ee82e1ce96e3f6"
+                "reference": "aad5cf1880e79f7f6b1034dc66d71403f541b9ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Emeset-mvc/emeset/zipball/f34476e8e8439f8c6f903abde1ee82e1ce96e3f6",
-                "reference": "f34476e8e8439f8c6f903abde1ee82e1ce96e3f6",
+                "url": "https://api.github.com/repos/Emeset-mvc/emeset/zipball/aad5cf1880e79f7f6b1034dc66d71403f541b9ad",
+                "reference": "aad5cf1880e79f7f6b1034dc66d71403f541b9ad",
                 "shasum": ""
             },
             "require": {
@@ -53,7 +53,7 @@
                 "issues": "https://github.com/laravel/emeset/issues",
                 "source": "https://github.com/Emeset-mvc/emeset"
             },
-            "time": "2022-11-02T15:44:29+00:00"
+            "time": "2022-11-02T16:41:04+00:00"
         },
         {
             "name": "nikic/fast-route",
