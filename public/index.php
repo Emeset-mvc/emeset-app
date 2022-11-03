@@ -6,7 +6,7 @@
  * Aquest Framework implementa el mínim per tenir un MVC per fer pràctiques
  * de M07.
  * @author: Dani Prados dprados@cendrassos.net
- * @version 0.1.0
+ * @version 0.1.5
  *
  * Punt d'netrada de l'aplicació exemple del Framework Emeset.
  * Per provar com funciona es pot executer php -S localhost:8000 a la carpeta public.
@@ -16,16 +16,16 @@
 
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 include "../vendor/autoload.php";
-include "../src/config.php";
+include "../App/config.php";
 
-include "../src/Controladors/portada.php";
-include "../src/Controladors/error.php";
-include "../src/Controladors/login.php";
-include "../src/Controladors/validarlogin.php";
-include "../src/Controladors/privat.php";
-include "../src/Controladors/tancarSessio.php";
-include "../src/Middleware/auth.php";
-include "../src/Middleware/test.php";
+include "../App/Controllers/portada.php";
+include "../App/Controllers/error.php";
+include "../App/Controllers/login.php";
+include "../App/Controllers/validarlogin.php";
+include "../App/Controllers/privat.php";
+include "../App/Controllers/tancarSessio.php";
+include "../App/Middleware/auth.php";
+include "../App/Middleware/test.php";
 
 
 /* Creem els diferents models */

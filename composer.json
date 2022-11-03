@@ -9,10 +9,10 @@
         "source": "https://github.com/Emeset-mvc/emeset-app"
     },
     "require": {
-        "emeset/framework": "^0.1.2"
+        "emeset/framework": "^0.1"
     },
 
     "autoload": {
-        "psr-4": {"App\\": "src/"}
+        "psr-4": {"App\\": "App/"}
     }
 }
