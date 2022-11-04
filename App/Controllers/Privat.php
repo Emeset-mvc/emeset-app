@@ -9,9 +9,9 @@
  *
  **/
 
-namespace Controladors;
+namespace App\Controllers;
 
-class CtrlPrivat
+class Privat
 {
 
     public $contenidor;
@@ -24,12 +24,12 @@ class CtrlPrivat
     /**
      * ctrlPortada: Controlador que carrega  la zona privada de l'exemple.
      *
-     * @param $request contingut de la peticó http.
-     * @param $response contingut de la response http.
-     * @param array $config  paràmetres de configuració de l'aplicació
+     * @param \Emeset\Http\Request $request contingut de la peticó http.
+     * @param \Emeset\Http\Response $response contingut de la response http.
+     * @param \Emeset\Container  $container contenidor de dependències.
      *
      **/
-    public function privat($request, $response, $config)
+    public function privat($request, $response, $container)
     {
         // Comptem quantes vegades has visitat aquesta pàgina
         $visites = $request->get(INPUT_COOKIE, "visites-privades");

@@ -18,11 +18,12 @@
  * @param array $config  paràmetres de configuració de l'aplicació
  *
  **/
-function ctrlValidarLogin($request, $response, $config)
+function ctrlValidarLogin($request, $response, $container)
 {
     // Comptem quantes vegades has visitat aquesta pàgina
     $usuari = $request->get(INPUT_POST, "usuari");
     $clau = $request->get(INPUT_POST, "clau");
+    $config = $container->get("config");
 
 
     if ($usuari === $config["login"]["usuari"] && $clau == $config["login"]["clau"]) {

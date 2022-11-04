@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Middelware que no fa res
+ * Middleware que gestiona l'autenticació
  *
- * @param petitcio $request
- * @param response $response
- * @param funcio $next  ha de ser el controlador
- * @param array $config  paràmetres de configuració de l'aplicació
- * @return result
+ * @param \Emeset\Http\Request $request petició HTTP
+ * @param \Emeset\Http\Response $response resposta HTTP
+ * @param \Emeset\Container $container  
+ * @param callable $next  següent middleware o controlador.   
+ * @return \Emeset\Http\Response resposta HTTP
  */
 function test($request, $response, $config, $next)
 {

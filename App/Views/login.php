@@ -13,7 +13,7 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="container p-6 max-w-sm  bg-white rounded-sm shadow-lg flex items-center space-x-4">
     <div class="row mt-1 mb-3">
       <div class="col">
         <h1>Exemple de controlador del Framework Emeset</h1>
