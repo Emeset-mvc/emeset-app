@@ -10,9 +10,9 @@ class Container extends EmesetContainer {
     public function __construct($config){
         parent::__construct($config);
         
-        $this["ctrlPrivat"] = function ($c) {
+        $this["\App\Controllers\Privat"] = function ($c) {
             // Aqui podem inicialitzar totes les dependències del controlador i passar-les com a paràmetre.
-            return new \ctrlPrivat($c);
+            return new \App\Controllers\Privat($c);
         };
     }
 }

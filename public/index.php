@@ -22,7 +22,7 @@ include "../App/Controllers/portada.php";
 include "../App/Controllers/error.php";
 include "../App/Controllers/login.php";
 include "../App/Controllers/validarlogin.php";
-include "../App/Controllers/privat.php";
+//include "../App/Controllers/privat.php";
 include "../App/Controllers/tancarSessio.php";
 include "../App/Middleware/auth.php";
 include "../App/Middleware/test.php";
@@ -37,13 +37,20 @@ $app = new \Emeset\Emeset($contenidor);
 $app->route("", "ctrlPortada");
 $app->route("login", "ctrlLogin");
 $app->route("validar-login", "ctrlValidarLogin");
-$app->route("privat", "\Controladors\CtrlPrivat:privat", ["auth"]);
+$app->route("privat", "\App\Controllers\Privat:privat", ["auth"]);
 $app->route("tancar-sessio", "ctrlTancarSessio", ["auth"]);
 
 $app->route("ajax", function ($request, $response) {
     $response->set("result", "ok");
     return $response;
 });
+
+$app->route("/hola/{id}", function ($request, $response) {
+    $id = $request->getParam("id");
+    $response->setBody("Hola {$id}!");
+    return $response;
+});
+
 $app->route(\Emeset\Routers\Router::DEFAULT_ROUTE, "ctrlError");
 
 $app->execute();
