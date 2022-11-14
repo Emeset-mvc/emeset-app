@@ -100,7 +100,8 @@ Un cop instal·lada l’aplicació tenim la següent estructura de carpetes.
 
 La carpeta App té la major part del codi de l’aplicació. 
 La carpeta Controllers és on desem tots els controladors.
-La carpeta css els fitxers css abans de processar, cal instal·lar el PostCSS.
+La carpeta css és on desem els fitxers css abans de processar, cal instal·lar el PostCSS.
+La carpeta js és on desem els fitxers js abans de processar, cal instal·lar el Webpack per poder-ho fer.
 La carpeta Middleware és on desem les diferents funcions Middleware.
 La carpeta Views és on desem les vistes del projecte.
 
@@ -202,7 +203,7 @@ function ctrlIndex($request, $response, $container){
 
 ### Definir controladors amb classes
 
-Podem fer servir mètodes per crear controladors, això ens permet agrupar en una mateixa classe controladors relacionats (un CRUD per exemple) i organitzar el codi millor definint mètodes que es puguin reutilitzar entre els diferents controladors relacionats.
+Podem fer servir els mètodes d'una classe com a controladors, això ens permet agrupar en una mateixa classe controladors relacionats (un CRUD per exemple) i organitzar el codi millor definint mètodes que es puguin reutilitzar entre els diferents controladors relacionats.
 
 ```php
 <?php
@@ -258,9 +259,9 @@ Utilitzant controladors definits amb classes ens permet aprofitar dues noves fun
 
 ### Autocarrega de classes (Autoload)
 
-Amb PHP podem definir funcions que quan intentem instància una classe que no tenim disponible s’executaran i podrem realitzar les accions necessàries perquè la classe passi a estar disponible, es coneix com el mecanisme d’autocarrega (autoload en anglès), és molt útil per què ens evita haver de fer llistats interminables d’includes i haver de mantenir-los. [Autoloading classes](https://www.php.net/manual/en/language.oop5.autoload.php)
+Amb PHP podem definir funcions que s'executaran si intenemt instànciar una classe que no tenim disponible i així podrem realitzar les accions necessàries perquè la classe passi a estar disponible, es coneix com el mecanisme d’autocarrega (autoload en anglès), és molt útil per què ens evita haver de fer llistats interminables d’includes i haver de mantenir-los. [Autoloading classes](https://www.php.net/manual/en/language.oop5.autoload.php)
 
-Però com estem fent servir composer,  tot plegat és encara més senzill. En el fitxer composer.json hi ha definit un esquema d’autocarrega.
+Però com estem fent servir composer,  tot plegat és encara més senzill. En el fitxer composer.json podem definir un esquema d’autocarrega i el mateix composer ens generarà un "autoloader" per el nostre projecte.
 
 ```json
    "autoload": {
@@ -275,7 +276,7 @@ $privat = new \App\Controller\Privat($container);
 ```
 Si la classe \App\Controller\Privat no està definida el mecanisme d’autocarrega del Composer la buscarà al fitxer Privat.php de la carpeta ./App/Controller/.
 
-Així que seguint la convenció de nomenclatura PSR-4 ens podem oblidar d’estar escrivint un include per cada controlador que fem servir, sempre que els definim com a classes.
+Així que seguint la convenció de nomenclatura PSR-4 ens podem oblidar d’estar escrivint un include per cada controlador que fem servir, sempre que els definim com a classes seguint la nomenclatura establerta per la convenció PSR-4.
 
 ### Injecció de dependències.
 
@@ -301,7 +302,7 @@ class Container extends EmesetContainer {
         
         $this["\App\Controllers\Privat"] = function ($c) {
             // Aqui podem inicialitzar totes les dependències del controlador i passar-les com a paràmetre.
-	$usuaris = $c->get("usuaris");
+	        $usuaris = $c->get("usuaris");
             return new \App\Controllers\Privat($usuaris);
         };
     }
@@ -334,6 +335,18 @@ function test($request, $response, $config, $next)
     return $response;
 }
 ```
+
+La funció nexMiddleware gestiona quin és el següent element en la llista d'execució de la ruta actual, és el que ens permet afegir més d'una middleware en una ruta.
+
+```php
+function nextMiddleware($request, $response, $container, $next)
+```
+$request:  Objecte de tipus \Emeset\Http\Request
+$response: Objecte de tipus \Emeset\Http\Response
+$container: Objecte de tipus \Emeset\Container
+$next: Callable del següent middleware o controlador.
+
+
 ## La petició (\Emeset\Http\Request)
 
 Un objecte de la classe \Emeset\Http\Request encapsula tota la petició HTTP.
@@ -513,6 +526,25 @@ Un cop definit el contenidor,  el podem utilitzar en qualsevol controlador o mid
 ```php
 $user = $contenidor->get("user");  // Retorna una instància de l’objecte user.
 ```
+
+# Eines frontend (Tooling)
+
+Emeset és agnòstic respecte a les eines de frontend, però l’aplicació base ve preconfigurada amb TailwindCSS com a framework CSS  i amb Webpack per empaquetar el javascript.
+
+Per poder utilitzar aquestes eines ens cal tenir instal·lat [node](https://nodejs.org/en/).
+
+Per instal·lar totes les dependències necessaries:
+
+```bash
+$ npm install
+```
+
+Un cop tenim instal·lades les dependències, podem executar les diferents eines.
+
+- npm run build  -> generarà un nous fitxers css i js  pel nostre projecte processant els fitxers /App/css/main.css i /App/js/index.js.
+- npm run watch -> generarà un nous fitxers css i js  pel nostre projecte cada cop que hi hagi un canvi en els fitxers /App/css/main.css i /App/js/index.js.
+- npm run start -> inicia el servidor web a localhost:8080 i executa npm run watch.
+- npm run prod -> com npm run build, però preparà els fitxers per un entorn de producció.
 
 
 
