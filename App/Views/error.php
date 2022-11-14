@@ -7,39 +7,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="/main.css">
 
   <title>Exemple d'us de sessions</title>
 </head>
 
 <body>
-  <div class="container">
-    <div class="row mt-1 mb-3">
-      <div class="col">
-        <h1 class="text-danger">Alguna cosa ha anat malament</h1>
+  <div class="container mx-auto p-10">
+    <div class="grid grid-cols-1 gap-4">
+      <div>
+        <h1 class="mb-4 text-xl text-red-700 font-extrabold tracking-tight leading-none text-gray-900 md:text-3xl lg:text-4xl dark:text-white">Alguna cosa ha anat malament!</h1>
       </div>
     </div>
 
     <?php if (isset($error) && $error != "") { ?>
-      <div class="alert alert-danger" role="alert">
-        <?= $error; ?>
+      <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+        <?= $error ?>
       </div>
     <?php } ?>
 
-    <div class="row mt-1 mb-1">
-      <div class="col">
-        <p>Si has arribat aquí vol dir que alguna cosa ha fallat.</p>
+    <div class="grid grid-cols-1 gap-4">
+      <div>
+        <p class="text-base">Si has arribat aquí vol dir que alguna cosa ha fallat.</p>
       </div>
     </div>
 
   </div>
-
-
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <script src="/js/bundle.js"></script>
 </body>
 
 </html>

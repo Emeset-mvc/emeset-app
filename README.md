@@ -65,7 +65,7 @@ $app->route("", function($request, $response, $container){
 
 Un cop creat l’objecte Emeset ens permet definir les rutes i definir quins controladors s’executaran. Els controladors han de ser “callables”, o sigui, poden ser funcions anònimes, funcions o mètodes de classes.
 
-En aquest exemple hem utilitzat una funció anonima, però tenim altres opcions.
+En aquest exemple hem utilitzat una funció anònima, però tenim altres opcions.
 
 ```php
 $app->route("validar-login", "ctrlValidarLogin"); // el controlador és una funció
@@ -86,6 +86,7 @@ L’estructura mínima no és massa pràctica per desenvolupar aplicacions, la i
 
 Un cop instal·lada l’aplicació tenim la següent estructura de carpetes.
 
+```
 ├── App
 │   ├── Controllers
 │   ├── css
@@ -95,6 +96,7 @@ Un cop instal·lada l’aplicació tenim la següent estructura de carpetes.
 ├── cli
 ├── public
 └── vendor
+```
 
 La carpeta App té la major part del codi de l’aplicació. 
 La carpeta Controllers és on desem tots els controladors.
