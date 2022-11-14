@@ -43,7 +43,7 @@ Aquesta “aplicació“ saludarà efusivament a qui faci una petició GET, per�
 ```php
 include "../vendor/autoload.php";
 ```
-En el primer pas incloem l’autoload de composer. Composer no només ens permet instal·lar llibreries de tercers, també ens gestiona automàticament les depedències de la nostra aplicació, assegurarant que podem utiltizar qualsevol classe de les llibreries que hem instal·lat sense haver de preocupar-nos d’afegir cap línea include ni require.
+En el primer pas incloem l’autoload de composer. Composer no només ens permet instal·lar llibreries de tercers, també ens gestiona automàticament les dependències de la nostra aplicació, assegurant que podem utilitzar qualsevol classe de les llibreries que hem instal·lat sense haver de preocupar-nos d’afegir cap línia include ni require.
 
 ```php
 $contenidor = new \Emeset\Container([]);
@@ -79,16 +79,44 @@ $app->execute();
 ```
 
 Finalment, un cop hem definit totes les rutes, podem executar l’aplicació. Així processarem la petició HTTP i acabarem executant el controlador que toqui per acabar generant una resposta HTTP.
+
+## Arquitectura d’una aplicació
+
+L’estructura mínima no és massa pràctica per desenvolupar aplicacions, la instal·lació ens crea una estructura d’aplicació a partir de la que podem desenvolupar les nostres aplicacions.
+
+Un cop instal·lada l’aplicació tenim la següent estructura de carpetes.
+
+├── App
+│   ├── Controllers
+│   ├── css
+│   ├── Middleware
+│   ├── Models
+│   └── Views
+├── cli
+├── public
+└── vendor
+
+La carpeta App té la major part del codi de l’aplicació. 
+La carpeta Controllers és on desem tots els controladors.
+La carpeta css els fitxers css abans de processar, cal instal·lar el PostCSS.
+La carpeta Middleware és on desem les diferents funcions Middleware.
+La carpeta Views és on desem les vistes del projecte.
+
+La carpeta cli la utilitzem per desar els scripts relacionats amb la inicialització i manteniment del projecte.
+
+La carpeta public té tots els continguts públics del projecte, entre ells el fitxer index.php o  definim totes les rutes.
+
+
 ## Router (Encaminador)
 
-El ruter és el responsable de decidir quin controlador s’ha d’executar en funció de la petició rebuda. El framework incorpora dos encaminadors diferents:
+L’encaminador és el responsable de decidir quin controlador s’ha d’executar en funció de la petició rebuda. El framework incorpora dos encaminadors diferents:
 
 \Emeset\Router\RouterParam
 \Emeset\Router\RouterHttp
 
-El RouterParam funciona utilitzant el paràmetre r, que pot rebre per GET o POST. En funció del valor que tingui r escollirà quin controlador s’ha d’executar.
+El RouterParam funciona fent servir el paràmetre r, que pot rebre per GET o POST. En funció del valor que tingui r escollirà quin controlador s’ha d’executar.
 
-El RouterHTTP fa servir el mètode HTTP i l’url de la petició per determinar quin controlador  s’executa. En el servidor cal tenir activat el mod_rewrite.
+El RouterHTTP fa servir el mètode HTTP i l’URL de la petició per determinar quin controlador s’executa. En el servidor cal tenir activat el mod_rewrite.
 
 ### Encaminador per paràmetre (\Emeset\Router\RouterParam)
 L’encaminador determina quin controlador s’ha d’executar a partir del paràmetre r. 
@@ -148,9 +176,10 @@ Així si estem executant la nostra aplicació a localhost:8080 amb la següent u
 
 obtindrem:
 
-Hola Dani!
+“Hola Dani!”
 
 Aquí pots trobar la documentació de com podem definir rutes amb paràmetres. (Defining routes)[https://github.com/nikic/FastRoute#defining-routes].
+
 ## Controladors
 
 El controlador ha de ser un element “callable” que ha de tenir com a paràmetres d’entrada un objecte \Emeset\Request, un objecte \Emeset\Response i un objecte \Emeset\Container i ha de retornar com a resultat un objecte \Emeset\Response.
@@ -227,9 +256,9 @@ Utilitzant controladors definits amb classes ens permet aprofitar dues noves fun
 
 ### Autocarrega de classes (Autoload)
 
-Amb PHP podem definir funcions que quan intentem instància una classe que no tenim disponible s’executaran i podrem realitzar les accions necessàries perquè la classe passi a estar disponible, es coneix com el mecanisme d’autocarrega (autoload en anglés), és molt útil per què ens evita haver de fer llistats interminables d’includes i haver de mantenir-los. [Autoloading classes](https://www.php.net/manual/en/language.oop5.autoload.php)
+Amb PHP podem definir funcions que quan intentem instància una classe que no tenim disponible s’executaran i podrem realitzar les accions necessàries perquè la classe passi a estar disponible, es coneix com el mecanisme d’autocarrega (autoload en anglès), és molt útil per què ens evita haver de fer llistats interminables d’includes i haver de mantenir-los. [Autoloading classes](https://www.php.net/manual/en/language.oop5.autoload.php)
 
-Però com estem utilitzant composer,  tot plegat és encara més senzill. En el fitxer composer.json hi ha definit un esquema d’autocarrega.
+Però com estem fent servir composer,  tot plegat és encara més senzill. En el fitxer composer.json hi ha definit un esquema d’autocarrega.
 
 ```json
    "autoload": {
@@ -299,7 +328,7 @@ function test($request, $response, $config, $next)
 
     // aquí podem executar codi abans de cridar el següent middleware o el controlador
     $response = nextMiddleware($request, $response, $config, $next); // Aquí cridem al següent middleware o el controlador.
-     // aquí podem executar codi despres de cridar el següent middleware o el controlador	
+     // aquí podem executar codi després de cridar el següent middleware o el controlador	
     return $response;
 }
 ```
@@ -407,7 +436,7 @@ $response->setCookie("contador", $contador);
 
 ### Resposta en format JSON
 
-Si volem generar una resposta en format JSON podem utilitzar el mètode setJson() així  la resposta codificarà a format JSON tota la informació que hem afegit.
+Si volem generar una resposta en format JSON podem utilitzar el mètode setJson() així la resposta codificarà a format JSON tota la informació que hem afegit.
 
 ```php
 // Generarà la sortida en format JSON.
@@ -426,3 +455,64 @@ L’objecte Resposta ens permet generar una resposta directament, amb el mètode
 ```php
 $response->setBody("Hola món!");
 ```
+
+
+# Contenidor (Container)
+El contenidor gestiona les dependències del projecte. Per implementar-lo utilitzem el contenidor Pimple del projecte Symfony. El que fem és estendre el contenidor i definir les dependències de base d’un projecte Emeset.
+
+Per defecte el contenidor ja té definit com instanciar els diferents objectes necessaris per fer funcionar l’aplicació mínima.
+
+```php
+$contenidor->config  // recuperem la configuració
+$request = $contenidor->get("request"); // Retorna una instància de l’objecte request.
+```
+
+Si volem afegir o sobreescriure definicions en el contenidor el que hem de fer és definir una classe que extengui la classe \Emeset\Container.
+
+```php
+
+<?php
+
+
+namespace App;
+
+use Emeset\Container as EmesetContainer;
+
+class Container extends EmesetContainer {
+
+    public function __construct($config){
+        parent::__construct($config);
+
+        /* Podem definir com s’han d’instanciar els diferents models. */
+        $this["user"] = function ($c) {
+            return new \App\Model\User($c->get("db"));
+        };
+        
+        /* Si definim una entrada per la classe d’un controlador s’utilitzarà aquest codi
+           per instanciar-la, això ens permet gestionar les depedències específiques de
+           cada controlador. */
+        $this["\App\Controllers\Privat"] = function ($c) {
+            // Aqui podem inicialitzar totes les dependències del controlador i passar-les com a paràmetre.
+            return new \App\Controllers\Privat($c);
+        };
+
+        /* També podem sobreescriure definicions del contenidor base per així
+            personalitzar el comportament de la nostra aplicació. */
+        $this["request"] = function ($c) {
+            return new \ElMeuRequest($c);
+        };
+
+    }
+}
+```
+
+Un cop definit el contenidor,  el podem utilitzar en qualsevol controlador o middleware.
+
+```php
+$user = $contenidor->get("user");  // Retorna una instància de l’objecte user.
+```
+
+
+
+
+#FpInfor #DawMp07 #DawMp07Uf01 #DawMp07Uf02 #DawMp07Uf03 #DawMp07Uf04
