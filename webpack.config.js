@@ -6,7 +6,6 @@ module.exports = {
   target: 'web',
 
   mode: 'development',
-  watch: true,
     
   entry: {
     index: path.join(__dirname, 'App/js/index.js'),
