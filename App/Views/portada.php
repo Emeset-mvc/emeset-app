@@ -24,6 +24,7 @@
     <div class="grid grid-cols-1 gap-4 mt-10">
       <div class="text-base">
         <p><?= $missatge  ?></p>
+        <p id="missatge"></p>
       </div>
     </div>
   </div>
