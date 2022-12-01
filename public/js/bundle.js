@@ -19,6 +19,17 @@ eval("var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!\n * jQ
 
 /***/ }),
 
+/***/ "./App/js/example.ts":
+/*!***************************!*\
+  !*** ./App/js/example.ts ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Example\": () => (/* binding */ Example),\n/* harmony export */   \"obj\": () => (/* binding */ obj)\n/* harmony export */ });\nvar Example = /** @class */ (function () {\n    function Example(nameBook, years) {\n        this.nameBook = nameBook;\n        this.years = years;\n    }\n    return Example;\n}());\nvar obj = new Example(\"Meditation\", 2005);\n\n\n\n//# sourceURL=webpack:///./App/js/example.ts?");
+
+/***/ }),
+
 /***/ "./App/js/hola.js":
 /*!************************!*\
   !*** ./App/js/hola.js ***!
@@ -37,7 +48,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n/* harmony import */ var _hola_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./hola.js */ \"./App/js/hola.js\");\n\n\n\n\njquery__WEBPACK_IMPORTED_MODULE_0__(document).ready(function() {\n    console.log('Hello World');\n    (0,_hola_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])();\n});\n\n\n//# sourceURL=webpack:///./App/js/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n/* harmony import */ var _hola_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./hola.js */ \"./App/js/hola.js\");\n/* harmony import */ var _example_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./example.ts */ \"./App/js/example.ts\");\n\n\n\n\n\n\njquery__WEBPACK_IMPORTED_MODULE_0__(function() {\n    console.log('Hello World');\n    (0,_hola_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])();\n    console.log(jquery__WEBPACK_IMPORTED_MODULE_0__(\"#mapa\").data(\"location\"));\n    let locations = jquery__WEBPACK_IMPORTED_MODULE_0__(\"#mapa\").data(\"location\");\n    console.log(locations);\n    jquery__WEBPACK_IMPORTED_MODULE_0__(\"body\").on(\"click\", f);\n    console.log(\"Example\", _example_ts__WEBPACK_IMPORTED_MODULE_2__.obj);\n});\n\nfunction f() {\n    console.log('f');\n}\n\n\n\n//window.f = f;\n\n\n//# sourceURL=webpack:///./App/js/index.js?");
 
 /***/ })
 
