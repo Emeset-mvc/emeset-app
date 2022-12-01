@@ -529,7 +529,7 @@ $user = $contenidor->get("user");  // Retorna una instància de l’objecte user
 
 # Eines frontend (Tooling)
 
-Emeset és agnòstic respecte a les eines de frontend, però l’aplicació base ve preconfigurada amb TailwindCSS com a framework CSS  i amb Webpack per empaquetar el javascript.
+Emeset és agnòstic respecte a les eines de frontend, però l’aplicació base ve preconfigurada amb TailwindCSS com a framework CSS  i amb Webpack per empaquetar el Javascript i TypeScript.
 
 Per poder utilitzar aquestes eines ens cal tenir instal·lat [node](https://nodejs.org/en/).
 
@@ -545,6 +545,9 @@ Un cop tenim instal·lades les dependències, podem executar les diferents eines
 - npm run watch -> generarà un nous fitxers css i js  pel nostre projecte cada cop que hi hagi un canvi en els fitxers /App/css/main.css i /App/js/index.js.
 - npm run start -> inicia el servidor web a localhost:8080 i executa npm run watch.
 - npm run prod -> com npm run build, però preparà els fitxers per un entorn de producció.
+- npm run test -> executar els testos que trobi, fitxers *.test.js
+
+Si els fitxers tenen l'extensió .ts seran transpilats de TypeScript a Javascript.
 
 
 
