@@ -16,23 +16,18 @@
 
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 include "../vendor/autoload.php";
-include "../App/config.php";
-
 include "../App/Controllers/portada.php";
 include "../App/Controllers/error.php";
 include "../App/Controllers/login.php";
 include "../App/Controllers/validarlogin.php";
-//include "../App/Controllers/privat.php";
 include "../App/Controllers/tancarSessio.php";
 include "../App/Middleware/auth.php";
 include "../App/Middleware/test.php";
 
-
 /* Creem els diferents models */
-$contenidor = new \App\Container($config);
+$contenidor = new \App\Container(__DIR__ . "/../App/config.php");
 
 $app = new \Emeset\Emeset($contenidor);
-
 
 $app->route("", "ctrlPortada");
 $app->route("login", "ctrlLogin");
