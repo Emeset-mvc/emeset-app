@@ -109,6 +109,44 @@ La carpeta cli la utilitzem per desar els scripts relacionats amb la inicialitza
 
 La carpeta public té tots els continguts públics del projecte, entre ells el fitxer index.php o  definim totes les rutes.
 
+## Configuració
+
+Quan inicilitzem el framework carrega el fitxer de configuració /App/config.php dins del contenidor.
+
+Així podem accedir als paràmetres de configuració amb $contenidor["config"] en qualsevol punt de l'aplicació.
+
+```php
+<?php
+
+return [
+    /* configuració de connexió a la base dades */
+    /* Path on guardarem el fitxer sqlite */
+    "sqlite" => [
+        "path" => Emeset\Env::get("sqlite_path", "../"),
+        "name" => Emeset\Env::get("sqlite_name", "db.sqlite")
+    ],
+    /* Nom de la cookie */
+    "cookie" => [
+        "name" => Emeset\Env::get("cookie_name", 'visites')
+    ],
+    "login" => [
+        "usuari" => Emeset\Env::get("login_usuari", "dani"),
+        "clau" => Emeset\Env::get("login_clau", "1234")
+    ],
+];
+```
+
+La funció Emeset\Env::get ens permet llegir els paràmetres de configuració de les variables d'entorn o dels paràmetres que trobi al fitxer .env de l'arrel del projecte.
+
+El primer paràmetre és la variable que volem consultar i el segon el valor que utilitzarem per defecte en el cas que la variable no estigui definida.
+
+Exemple de fixer .env.
+```
+sqlite_path = "../"
+sqlite_name = "tasks.db"
+login_clau = "Una altra clau"
+```
+
 
 ## Router (Encaminador)
 
