@@ -18,7 +18,7 @@
  * @param array $config  paràmetres de configuració de l'aplicació
  *
  **/
-function ctrlValidarLogin($request, $response, $container)
+function ctrlValidarLogin(\Emeset\Http\Request $request, \Emeset\Http\Response $response, $container)
 {
     // Comptem quantes vegades has visitat aquesta pàgina
     $usuari = $request->get(INPUT_POST, "usuari");

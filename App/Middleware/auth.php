@@ -9,7 +9,7 @@
  * @param callable $next  següent middleware o controlador.   
  * @return \Emeset\Http\Response resposta HTTP
  */
-function auth($request, $response, $container, $next)
+function auth(\Emeset\Http\Request $request, \Emeset\Http\Response $response, \Emeset\Container $container, $next)
 {
 
     $usuari = $request->get("SESSION", "usuari");
@@ -25,7 +25,7 @@ function auth($request, $response, $container, $next)
 
     // si l'usuari està logat permetem carregar el recurs
     if ($logat) {
-        $response = nextMiddleware($request, $response, $container, $next);
+        $response = \Emeset\Middleware::next($request, $response, $container, $next);
     } else {
         $response->redirect("location: /login");
     }
