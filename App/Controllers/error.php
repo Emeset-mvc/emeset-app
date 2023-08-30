@@ -17,7 +17,7 @@
  * @param array $config  paràmetres de configuració de l'aplicació
  *
  **/
-function ctrlError($request, $response, $config)
+function ctrlError(\Emeset\Http\Request $request, \Emeset\Http\Response $response, $config)
 {
 
   $error = $nom = $request->get("SESSION", "error");

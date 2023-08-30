@@ -29,7 +29,7 @@ class Privat
      * @param \Emeset\Container  $container contenidor de dependències.
      *
      **/
-    public function privat($request, $response, $container)
+    public function privat(\Emeset\Http\Request $request, \Emeset\Http\Response $response, $container)
     {
         // Comptem quantes vegades has visitat aquesta pàgina
         $visites = $request->get(INPUT_COOKIE, "visites-privades");

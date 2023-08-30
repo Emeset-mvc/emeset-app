@@ -17,7 +17,7 @@
  * @param array $config  paràmetres de configuració de l'aplicació
  *
  **/
-function ctrlPortada($request, $response, $config)
+function ctrlPortada(\Emeset\Http\Request $request, \Emeset\Http\Response $response, $config)
 {
     // Comptem quantes vegades has visitat aquesta pàgina
     $visites = $request->get(INPUT_COOKIE, "visites");

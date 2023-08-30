@@ -17,7 +17,7 @@
  * @param array $config  paràmetres de configuració de l'aplicació
  *
  **/
-function ctrlLogin($request, $response, $config)
+function ctrlLogin(\Emeset\Http\Request $request, \Emeset\Http\Response $response, $config)
 {
   // Comptem quantes vegades has visitat aquesta pàgina
   $error = $request->get("SESSION", "error");

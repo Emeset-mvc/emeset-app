@@ -18,7 +18,7 @@
  * @param array $config  paràmetres de configuració de l'aplicació
  *
  **/
-function ctrlTancarSessio($request, $response, $config)
+function ctrlTancarSessio(\Emeset\Http\Request $request, \Emeset\Http\Response $response, $config)
 {
   $response->setSession("logat", false);
   $response->redirect("location: /");
