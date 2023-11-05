@@ -6,13 +6,15 @@
  * Aquest Framework implementa el mínim per tenir un MVC per fer pràctiques
  * de M07.
  * @author: Dani Prados dprados@cendrassos.net
- * @version 0.2.1
+ * @version 0.2.5
  *
  * Punt d'netrada de l'aplicació exemple del Framework Emeset.
  * Per provar com funciona es pot executer php -S localhost:8000 a la carpeta public.
  * I amb el navegador visitar la url http://localhost:8000/
  *
  */
+
+use \Emeset\Contracts\Routers\Router;
 
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 include "../vendor/autoload.php";
@@ -46,6 +48,6 @@ $app->route("/hola/{id}", function ($request, $response) {
     return $response;
 });
 
-$app->route(\Emeset\Routers\Router::DEFAULT_ROUTE, "ctrlError");
+$app->route(Router::DEFAULT_ROUTE, "ctrlError");
 
 $app->execute();

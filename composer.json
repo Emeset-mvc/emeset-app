@@ -9,8 +9,7 @@
         "source": "https://github.com/Emeset-mvc/emeset-app"
     },
     "require": {
-        "emeset/framework": "^0.2",
-        "vlucas/phpdotenv": "^5.5"
+        "emeset/framework": "^0.2"
     },
 
     "autoload": {
