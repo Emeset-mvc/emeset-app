@@ -1,5 +1,9 @@
 <?php
 
+use \Emeset\Contracts\Http\Request;
+use \Emeset\Contracts\Http\Response;
+use \Emeset\Contracts\Container;
+
 /**
  * Controlador de la portada d'exemple del Framework Emeset
  * Framework d'exemple per a M07 Desenvolupament d'aplicacions web.
@@ -17,7 +21,7 @@
  * @param array $config  paràmetres de configuració de l'aplicació
  *
  **/
-function ctrlPortada(\Emeset\Http\Request $request, \Emeset\Http\Response $response, $config)
+function ctrlPortada(Request $request, Response $response, Container $container) :Response
 {
     // Comptem quantes vegades has visitat aquesta pàgina
     $visites = $request->get(INPUT_COOKIE, "visites");

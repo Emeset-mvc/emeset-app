@@ -1,5 +1,9 @@
 <?php
 
+use \Emeset\Contracts\Http\Request;
+use \Emeset\Contracts\Http\Response;
+use \Emeset\Contracts\Container;
+
 /**
  * Controlador que gestiona el procés de login
  * Framework d'exemple per a M07 Desenvolupament d'aplicacions web.
@@ -18,7 +22,7 @@
  * @param array $config  paràmetres de configuració de l'aplicació
  *
  **/
-function ctrlTancarSessio(\Emeset\Http\Request $request, \Emeset\Http\Response $response, $config)
+function ctrlTancarSessio(Request $request, Response $response, Container $container) :Response
 {
   $response->setSession("logat", false);
   $response->redirect("location: /");

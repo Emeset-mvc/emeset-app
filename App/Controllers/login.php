@@ -1,5 +1,9 @@
 <?php
 
+use \Emeset\Contracts\Http\Request;
+use \Emeset\Contracts\Http\Response;
+use \Emeset\Contracts\Container;
+
 /**
  * Controlador de login d'exemple del Framework Emeset
  * Framework d'exemple per a M07 Desenvolupament d'aplicacions web.
@@ -17,7 +21,7 @@
  * @param array $config  paràmetres de configuració de l'aplicació
  *
  **/
-function ctrlLogin(\Emeset\Http\Request $request, \Emeset\Http\Response $response, $config)
+function ctrlLogin(Request $request, Response $response, Container $container) :Response
 {
   // Comptem quantes vegades has visitat aquesta pàgina
   $error = $request->get("SESSION", "error");

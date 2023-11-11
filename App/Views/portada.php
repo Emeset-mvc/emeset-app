@@ -9,7 +9,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="/main.css">
 
-  <title>Exemple de portada</title>
+  <title><?=$app_config["app"]["name"]?></title>
 </head>
 
 <body>

@@ -1,5 +1,9 @@
 <?php
 
+use \Emeset\Contracts\Http\Request;
+use \Emeset\Contracts\Http\Response;
+use \Emeset\Contracts\Container;
+
 /**
  * Controlador de la pàgina d'error d'exemple del Framework Emeset
  * Framework d'exemple per a M07 Desenvolupament d'aplicacions web.
@@ -14,13 +18,13 @@
  *
  * @param $request contingut de la petiicó http.
  * @param $response contingut de la response http.
- * @param array $config  paràmetres de configuració de l'aplicació
+ * @param $container  paràmetres de configuració de l'aplicació
  *
  **/
-function ctrlError(\Emeset\Http\Request $request, \Emeset\Http\Response $response, $config)
+function ctrlError(Request $request, Response $response, Container $container) :Response
 {
 
-  $error = $nom = $request->get("SESSION", "error");
+  $error = $request->get("SESSION", "error");
   $response->set("error", $error);
   $response->SetTemplate("error.php");
 

@@ -30,6 +30,7 @@ include "../App/Middleware/test.php";
 $contenidor = new \App\Container(__DIR__ . "/../App/config.php");
 
 $app = new \Emeset\Emeset($contenidor);
+$app->middleware([\App\Middleware\App::class, "execute"]);
 
 $app->route("", "ctrlPortada");
 $app->route("login", "ctrlLogin");

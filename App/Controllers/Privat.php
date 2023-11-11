@@ -11,12 +11,16 @@
 
 namespace App\Controllers;
 
+use \Emeset\Contracts\Http\Request;
+use \Emeset\Contracts\Http\Response;
+use \Emeset\Contracts\Container;
+
 class Privat
 {
 
-    public $contenidor;
+    public Container $contenidor;
 
-    public function __construct($contenidor)
+    public function __construct(Container $contenidor)
     {
         $this->contenidor = $contenidor;
     }
@@ -24,12 +28,12 @@ class Privat
     /**
      * ctrlPortada: Controlador que carrega  la zona privada de l'exemple.
      *
-     * @param \Emeset\Http\Request $request contingut de la peticó http.
-     * @param \Emeset\Http\Response $response contingut de la response http.
-     * @param \Emeset\Container  $container contenidor de dependències.
+     * @param \Emeset\Contracts\Http\Request $request contingut de la peticó http.
+     * @param \Emeset\Contracts\Http\Response $response contingut de la response http.
+     * @param \Emeset\Contracts\Container  $container contenidor de dependències.
      *
      **/
-    public function privat(\Emeset\Http\Request $request, \Emeset\Http\Response $response, $container)
+    public function privat(Request $request, Response $response, Container $container) :Response
     {
         // Comptem quantes vegades has visitat aquesta pàgina
         $visites = $request->get(INPUT_COOKIE, "visites-privades");

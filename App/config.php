@@ -15,4 +15,8 @@ return [
         "usuari" => Emeset\Env::get("login_usuari", "dani"),
         "clau" => Emeset\Env::get("login_clau", "1234")
     ],
+    "app" => [
+        "name" => Emeset\Env::get("app_name", "Emeset demo"),
+        "version" => Emeset\Env::get("app_version", "0.2.5")
+    ]
 ];

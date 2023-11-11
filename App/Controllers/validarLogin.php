@@ -1,5 +1,9 @@
 <?php
 
+use \Emeset\Contracts\Http\Request;
+use \Emeset\Contracts\Http\Response;
+use \Emeset\Contracts\Container;
+
 /**
  * Controlador que gestiona el procés de login
  * Framework d'exemple per a M07 Desenvolupament d'aplicacions web.
@@ -15,10 +19,10 @@
  *
  * @param $request contingut de la peticó http.
  * @param $response contingut de la response http.
- * @param array $config  paràmetres de configuració de l'aplicació
+ * @param $container  paràmetres de configuració de l'aplicació
  *
  **/
-function ctrlValidarLogin(\Emeset\Http\Request $request, \Emeset\Http\Response $response, $container)
+function ctrlValidarLogin(Request $request, Response $response, Container $container) :Response
 {
     // Comptem quantes vegades has visitat aquesta pàgina
     $usuari = $request->get(INPUT_POST, "usuari");

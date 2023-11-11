@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "00997b7a78c40d081e6e4adaa3503a76",
+    "content-hash": "7b72ee8de6d00b8b7c8563fd58a771f6",
     "packages": [
         {
             "name": "emeset/framework",
-            "version": "0.2.5",
+            "version": "0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Emeset-mvc/emeset.git",
-                "reference": "1932fa82999757d14ef8a4fb8be961a093b98266"
+                "reference": "8828ee317fce4d475a88681c8f1e6bf0888b0484"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Emeset-mvc/emeset/zipball/1932fa82999757d14ef8a4fb8be961a093b98266",
-                "reference": "1932fa82999757d14ef8a4fb8be961a093b98266",
+                "url": "https://api.github.com/repos/Emeset-mvc/emeset/zipball/8828ee317fce4d475a88681c8f1e6bf0888b0484",
+                "reference": "8828ee317fce4d475a88681c8f1e6bf0888b0484",
                 "shasum": ""
             },
             "require": {
@@ -54,7 +54,7 @@
                 "issues": "https://github.com/laravel/emeset/issues",
                 "source": "https://github.com/Emeset-mvc/emeset"
             },
-            "time": "2023-11-05T17:42:23+00:00"
+            "time": "2023-11-11T15:36:38+00:00"
         },
         {
             "name": "graham-campbell/result-type",

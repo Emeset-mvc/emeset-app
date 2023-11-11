@@ -384,6 +384,17 @@ $response: Objecte de tipus \Emeset\Http\Response
 $container: Objecte de tipus \Emeset\Container
 $next: Callable del següent middleware o controlador.
 
+### Middleware global de l'aplicació
+Es pot definir middleware global de l'aplicació amb el mètode de la classe Emeset, middleware.
+
+```php
+$contenidor = new \App\Container(__DIR__ . "/../App/config.php");
+
+$app = new \Emeset\Emeset($contenidor);
+$app->middleware([\App\Middleware\App::class, "execute"]);
+```
+
+El middleware d'aplicació té la mateixa estructura que el middleware de qualsevol ruta. El FrontController és un controlador com els altres, l'única diferència és que és el controlador encarregat de decidir quin controlador ha de gestionar la petició actual. 
 
 ## La petició (\Emeset\Http\Request)
 
