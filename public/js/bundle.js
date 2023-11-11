@@ -26,7 +26,7 @@ eval("var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!\n * jQ
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   Example: () => (/* binding */ Example),\n/* harmony export */   obj: () => (/* binding */ obj)\n/* harmony export */ });\nvar Example = /** @class */ (function () {\n    function Example(nameBook, years) {\n        this.nameBook = nameBook;\n        this.years = years;\n    }\n    return Example;\n}());\nvar obj = new Example(\"Meditation\", 2005);\n\n\n\n//# sourceURL=webpack:///./App/js/example.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   Example: () => (/* binding */ Example),\n/* harmony export */   obj: () => (/* binding */ obj)\n/* harmony export */ });\nvar Example = /** @class */ (function () {\n    function Example(nameBook, years) {\n        this.nameBook = nameBook;\n        this.years = years;\n    }\n    return Example;\n}());\nvar obj = new Example(\"Meditation\", 2023);\n\n\n\n//# sourceURL=webpack:///./App/js/example.ts?");
 
 /***/ }),
 

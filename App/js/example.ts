@@ -6,6 +6,6 @@ class Example{
     { }
 }
 
-const obj:Example = new Example("Meditation", 2005);
+const obj:Example = new Example("Meditation", 2023);
 
 export {Example, obj}
