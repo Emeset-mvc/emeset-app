@@ -414,8 +414,8 @@ $r = $request->getRaw(INPUT_COOKIES, "r");
 // obtindrà el paràmetre r de la sessió i escaparà els caràcters especials.
 $r = $request->get("SESSION", "r"); 
 
-// obtindrà el paràmetre r de la sessió i escaparà els caràcters especials.
-$r = $request->get("FILES", "r"); 
+// obtindrà el paràmetre file de la petició $_FILES.
+$r = $request->get("FILES", "file"); 
 
 // obtindrà el paràmetre r de la sessió i escaparà els caràcters especials.
 $r = $request->get("INPUT_REQUEST", "r"); 
