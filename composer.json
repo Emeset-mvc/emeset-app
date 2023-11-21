@@ -9,7 +9,7 @@
         "source": "https://github.com/Emeset-mvc/emeset-app"
     },
     "require": {
-        "emeset/framework": "^0.3"
+        "emeset/framework": "^0.4"
     },
 
     "autoload": {
