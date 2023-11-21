@@ -6,7 +6,7 @@
  * Aquest Framework implementa el mínim per tenir un MVC per fer pràctiques
  * de M07.
  * @author: Dani Prados dprados@cendrassos.net
- * @version 0.2.5
+ * @version 0.4.0
  *
  * Punt d'netrada de l'aplicació exemple del Framework Emeset.
  * Per provar com funciona es pot executer php -S localhost:8000 a la carpeta public.
