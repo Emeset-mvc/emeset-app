@@ -72,7 +72,7 @@ $app->route("validar-login", "ctrlValidarLogin"); // el controlador és una func
 $app->route("privat", "\Controladors\CtrlPrivat:privat"); // el controlador és un mètode d’una classe
 ```
 
-Podem utilitzar funcions o mètodes de classes, de fet és el més recomanable.
+Podem utilitzar funcions o mètodes de classes, de fet utilitzar classes és el més recomanable.
 
 ```php
 $app->execute();
@@ -82,7 +82,7 @@ Finalment, un cop hem definit totes les rutes, podem executar l’aplicació. Ai
 
 ## Arquitectura d’una aplicació
 
-L’estructura mínima no és massa pràctica per desenvolupar aplicacions, la instal·lació ens crea una estructura d’aplicació a partir de la que podem desenvolupar les nostres aplicacions.
+L’estructura mínima no és massa pràctica per desenvolupar aplicacions. Amb la instal·lació que fa el composer ens crea una estructura de directoris per organitzada per poder crear les nostres aplicacions.
 
 Un cop instal·lada l’aplicació tenim la següent estructura de carpetes.
 
@@ -111,7 +111,7 @@ La carpeta public té tots els continguts públics del projecte, entre ells el f
 
 ## Configuració
 
-Quan inicilitzem el framework carrega el fitxer de configuració /App/config.php dins del contenidor.
+Quan inicialitzem el framework carrega el fitxer de configuració /App/config.php dins del contenidor.
 
 Així podem accedir als paràmetres de configuració amb $contenidor["config"] en qualsevol punt de l'aplicació.
 
@@ -297,7 +297,7 @@ Utilitzant controladors definits amb classes ens permet aprofitar dues noves fun
 
 ### Autocarrega de classes (Autoload)
 
-Amb PHP podem definir funcions que s'executaran si intenemt instànciar una classe que no tenim disponible i així podrem realitzar les accions necessàries perquè la classe passi a estar disponible, es coneix com el mecanisme d’autocarrega (autoload en anglès), és molt útil per què ens evita haver de fer llistats interminables d’includes i haver de mantenir-los. [Autoloading classes](https://www.php.net/manual/en/language.oop5.autoload.php)
+Amb PHP podem definir funcions que s'executaran si intentemt instanciar una classe que no tenim disponible i això permet realitzar les accions necessàries perquè la classe passi a estar disponible, es coneix com el mecanisme d’autocarrega (autoload en anglès), és molt útil per què ens evita haver de fer llistats interminables d’includes i haver de mantenir-los. [Autoloading classes](https://www.php.net/manual/en/language.oop5.autoload.php)
 
 Però com estem fent servir composer,  tot plegat és encara més senzill. En el fitxer composer.json podem definir un esquema d’autocarrega i el mateix composer ens generarà un "autoloader" per el nostre projecte.
 
@@ -379,10 +379,11 @@ La funció nexMiddleware gestiona quin és el següent element en la llista d'ex
 ```php
 function nextMiddleware($request, $response, $container, $next)
 ```
-$request:  Objecte de tipus \Emeset\Http\Request
-$response: Objecte de tipus \Emeset\Http\Response
-$container: Objecte de tipus \Emeset\Container
-$next: Callable del següent middleware o controlador.
+
+- $request:  Objecte de tipus \Emeset\Http\Request
+- $response: Objecte de tipus \Emeset\Http\Response
+- $container: Objecte de tipus \Emeset\Container
+- $next: Callable del següent middleware o controlador.
 
 ### Middleware global de l'aplicació
 Es pot definir middleware global de l'aplicació amb el mètode de la classe Emeset, middleware.

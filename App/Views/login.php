@@ -12,7 +12,7 @@
   <title>Exemple de portada</title>
 </head>
 
-<body>
+<body class="dark:bg-gray-600">
   <div class="container mx-auto p-10">
     <div class="grid grid-cols-1 gap-4">
       <div>
