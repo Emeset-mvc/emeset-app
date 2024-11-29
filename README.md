@@ -385,6 +385,33 @@ function nextMiddleware($request, $response, $container, $next)
 - $container: Objecte de tipus \Emeset\Container
 - $next: Callable del següent middleware o controlador.
 
+### Com utilitzar el middleware?
+
+El middleware el podem utilitzar en rutes concretes o  per tota l'aplicació.
+
+### Middleware per rutes
+
+Quan definim una ruta podem indicar que abans d'executar el controlador executi un o més middlewares.
+
+Si el middleare és una funció
+
+```php
+$app->get("privat", [\App\Controllers\Privat::class, "privat"], ["auth"]);
+```
+
+Podem definir més d'un middleware per ruta. S'executaran d'esquerra a dreta.
+
+```php
+$app->get("privat", [\App\Controllers\Privat::class, "privat"], ["auth", "isAdmin"]);
+```
+
+Per aprofitar les funcions d'autoload podem utilitzar classes per definir middlewares
+
+```php
+$app->get("privat", [\App\Controllers\Privat::class, "privat"], [[\App\Middleware\App::class, "auth"]]);
+$app->get("privat", [\App\Controllers\Privat::class, "privat"], [[\App\Middleware\App::class, "auth"], [\App\Middleware\App::class, "isAdmin"]]);
+```
+
 ### Middleware global de l'aplicació
 Es pot definir middleware global de l'aplicació amb el mètode de la classe Emeset, middleware.
 
@@ -485,6 +512,14 @@ La resposta ens permet desar informació a la sessió, el PHP ens permet fer-ho 
 // Quedarà desat a la sessió i podrem consultar en les pròximes consultes.
 $response->setSession("error", "Missatge d'error");  
 ```
+
+Si volem esborrar un valor de la sessió podem utilitzar el mètode unseSession($name)
+
+```php
+// Esborrarà l'entrade error de la sessió
+$response->unsetSession("error");  
+```
+
 
 ### Cookies
 
