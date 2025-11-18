@@ -1,12 +1,10 @@
-const path = require('path');
-
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path')
 
 module.exports = {
   target: 'web',
 
   mode: 'development',
-    
+
   entry: {
     index: path.join(__dirname, 'App/js/index.js'),
   },
@@ -22,21 +20,11 @@ module.exports = {
         test: /\.ts?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
-      },
-      {
-        test: /\.css$/i,
-        type: 'asset/resource',
-        generator: {
-            filename: '[name][ext][query]'
-        }
       }
     ],
   },
 
-  resolve: {
-    extensions: ['.js', '.ts'],
-  }
-
-  
-    
-};
+    resolve: {
+      extensions: ['.ts', '.js'],
+    },
+  };
