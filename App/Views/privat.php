@@ -1,35 +1,41 @@
 <!doctype html>
-<html lang="en">
+<html lang="ca">
 
 <head>
-  <!-- Required meta tags -->
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <link rel="stylesheet" href="/main.css">
 
   <title>Exemple de zona privada</title>
 </head>
 
 <body>
-  <div class="container mx-auto p-10">
-    <div class="grid grid-cols-1 gap-4">
-      <div>
-        <h1 class="mb-4 text-xl font-extrabold tracking-tight leading-none text-gray-900 md:text-3xl lg:text-4xl dark:text-white">Exemple de zona privada del Framework Emeset</h1>
+  <div class="container py-5">
 
-        <a href="/" class="focus:outline-none text-white bg-orange-400 hover:bg-orange-500 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 my-2">Accedeix a la zona pública</a>
+    <div class="row">
+      <div class="col">
+        <h1 class="fw-bold mb-4">Exemple de zona privada del Framework Emeset</h1>
 
-        <a href="/tancar-sessio" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 my-2">Tanca la sessió de <?= $usuari ?></a>
+        <a href="/" class="btn btn-warning me-2 mb-2">
+          Accedeix a la zona pública
+        </a>
+
+        <a href="/tancar-sessio" class="btn btn-danger mb-2">
+          Tanca la sessió de <?= $usuari ?>
+        </a>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 gap-4 mt-10">
-      <div class="text-base">
-        <p><?= $missatge  ?></p>
+    <div class="row mt-4">
+      <div class="col">
+        <p><?= $missatge ?></p>
       </div>
     </div>
+
   </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
   <script src="/js/bundle.js"></script>
 </body>
 

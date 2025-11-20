@@ -1,42 +1,36 @@
 const path = require('path');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+module.exports = (env, argv) => {
+  const isProd = argv.mode === 'production';
 
-module.exports = {
-  target: 'web',
+  return {
+    target: 'web',
+    mode: isProd ? 'production' : 'development',
 
-  mode: 'development',
-    
-  entry: {
-    index: path.join(__dirname, 'App/js/index.js'),
-  },
+    devtool: isProd ? 'source-map' : 'eval-source-map',
 
-  output: {
-    path: path.resolve(__dirname, 'public/js'),
-    filename: 'bundle.js',
-  },
+    entry: {
+      index: path.join(__dirname, 'App/js/index.js'),
+    },
 
-  module: {
-    rules: [
-      {
-        test: /\.ts?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.css$/i,
-        type: 'asset/resource',
-        generator: {
-            filename: '[name][ext][query]'
-        }
-      }
-    ],
-  },
+    output: {
+      path: path.resolve(__dirname, 'public/js'),
+      filename: 'bundle.js',
+      clean: true,   // neteja el directori de sortida abans de cada build
+    },
 
-  resolve: {
-    extensions: ['.js', '.ts'],
-  }
+    module: {
+      rules: [
+        {
+          test: /\.ts?$/,
+          use: 'ts-loader',
+          exclude: /node_modules/,
+        },
+      ],
+    },
 
-  
-    
+    resolve: {
+      extensions: ['.ts', '.js'],
+    },
+  };
 };

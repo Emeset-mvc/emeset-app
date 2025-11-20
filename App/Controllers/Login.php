@@ -1,28 +1,45 @@
 <?php
 
+namespace App\Controllers;
+
 use \Emeset\Contracts\Http\Request;
 use \Emeset\Contracts\Http\Response;
 use \Emeset\Contracts\Container;
 
 /**
- * Controlador que gestiona el procés de login
+ * Controlador de login d'exemple del Framework Emeset
  * Framework d'exemple per a M07 Desenvolupament d'aplicacions web.
  * @author: Dani Prados dprados@cendrassos.net
  *
- * Comprova si l'usuari s'ha autentificat correctament
+ * Carrega la pàgina de login
  *
  **/
 
+class Login {
+
 /**
- * ctrlValidarLogin: Controlador que comprova si l'usuari s'ha autentificat
- * correctament
+ * ctrlLogin: Controlador que carrega  la pàgina de login
  *
  * @param $request contingut de la peticó http.
  * @param $response contingut de la response http.
- * @param $container  paràmetres de configuració de l'aplicació
+ * @param array $config  paràmetres de configuració de l'aplicació
  *
  **/
-function ctrlValidarLogin(Request $request, Response $response, Container $container) :Response
+public function login(Request $request, Response $response, Container $container) :Response
+{
+  // Comptem quantes vegades has visitat aquesta pàgina
+  $error = $request->get("SESSION", "error");
+
+
+  $response->set("error", $error);
+  $response->setSession("error", "");
+
+  $response->SetTemplate("login.php");
+
+  return $response;
+}
+
+public function validarLogin(Request $request, Response $response, Container $container) :Response
 {
     // Comptem quantes vegades has visitat aquesta pàgina
     $usuari = $request->get(INPUT_POST, "usuari");
@@ -41,4 +58,14 @@ function ctrlValidarLogin(Request $request, Response $response, Container $conta
     }
 
     return $response;
+}
+
+public function tancarSessio(Request $request, Response $response, Container $container) :Response
+{
+  $response->setSession("logat", false);
+  $response->redirect("location: /");
+
+  return $response;
+}
+
 }
