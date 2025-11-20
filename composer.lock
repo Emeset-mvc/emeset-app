@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "emeset/framework",
-            "version": "0.4.6",
+            "version": "0.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Emeset-mvc/emeset.git",
-                "reference": "05901edca1bdfd9ff75039c86092f1ac4771ac2d"
+                "reference": "4612d54c92a4c36b7d3cca107a903e740a7e7657"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Emeset-mvc/emeset/zipball/05901edca1bdfd9ff75039c86092f1ac4771ac2d",
-                "reference": "05901edca1bdfd9ff75039c86092f1ac4771ac2d",
+                "url": "https://api.github.com/repos/Emeset-mvc/emeset/zipball/4612d54c92a4c36b7d3cca107a903e740a7e7657",
+                "reference": "4612d54c92a4c36b7d3cca107a903e740a7e7657",
                 "shasum": ""
             },
             "require": {
@@ -57,7 +57,7 @@
                 "issues": "https://github.com/laravel/emeset/issues",
                 "source": "https://github.com/Emeset-mvc/emeset"
             },
-            "time": "2025-11-18T22:22:23+00:00"
+            "time": "2025-11-20T10:43:00+00:00"
         },
         {
             "name": "graham-campbell/result-type",
