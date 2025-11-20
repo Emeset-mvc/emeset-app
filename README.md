@@ -89,9 +89,9 @@ Un cop instal·lada l’aplicació tenim la següent estructura de carpetes.
 ```
 ├── App
 │   ├── Controllers
-│   ├── css
 │   ├── Middleware
 │   ├── Models
+│   ├── js
 │   └── Views
 ├── cli
 ├── public
@@ -100,9 +100,8 @@ Un cop instal·lada l’aplicació tenim la següent estructura de carpetes.
 
 La carpeta App té la major part del codi de l’aplicació. 
 La carpeta Controllers és on desem tots els controladors.
-La carpeta css és on desem els fitxers css abans de processar, cal instal·lar el PostCSS.
-La carpeta js és on desem els fitxers js abans de processar, cal instal·lar el Webpack per poder-ho fer.
 La carpeta Middleware és on desem les diferents funcions Middleware.
+La carpeta js és on desem els fitxers js abans de processar, cal instal·lar el Webpack per poder-ho fer.
 La carpeta Views és on desem les vistes del projecte.
 
 La carpeta cli la utilitzem per desar els scripts relacionats amb la inicialització i manteniment del projecte.
@@ -614,7 +613,7 @@ $user = $contenidor->get("user");  // Retorna una instància de l’objecte user
 
 # Eines frontend (Tooling)
 
-Emeset és agnòstic respecte a les eines de frontend, però l’aplicació base ve preconfigurada amb TailwindCSS com a framework CSS  i amb Webpack per empaquetar el Javascript i TypeScript.
+Emeset és agnòstic respecte a les eines de frontend, però l’aplicació base ve preconfigurada amb Bootstrap amb CDN  i amb Webpack per empaquetar el Javascript i TypeScript.
 
 Per poder utilitzar aquestes eines ens cal tenir instal·lat [node](https://nodejs.org/en/).
 
@@ -626,9 +625,10 @@ $ npm install
 
 Un cop tenim instal·lades les dependències, podem executar les diferents eines.
 
-- npm run build  -> generarà un nous fitxers css i js  pel nostre projecte processant els fitxers /App/css/main.css i /App/js/index.js.
-- npm run watch -> generarà un nous fitxers css i js  pel nostre projecte cada cop que hi hagi un canvi en els fitxers /App/css/main.css i /App/js/index.js.
+- npm run build  -> generarà un nous  js  pel nostre projecte processant el fitxer  /App/js/index.js.
+- npm run watch -> generarà un nous fitxers js  pel nostre projecte cada cop que hi hagi un canvi en els fitxer  /App/js/index.js o les seves depedències.
 - npm run start -> inicia el servidor web a localhost:8080 i executa npm run watch.
+- npm run serve -> Inicia un servidor PHP integrat a public/ (php -S localhost:8080).
 - npm run prod -> com npm run build, però preparà els fitxers per un entorn de producció.
 - npm run test -> executar els testos que trobi, fitxers *.test.js
 

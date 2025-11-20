@@ -1,5 +1,4 @@
 import $ from "jquery";
-import 'bootstrap';
 
 import hola from "./hola.js";
 

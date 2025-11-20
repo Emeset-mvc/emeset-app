@@ -1,30 +1,36 @@
-const path = require('path')
+const path = require('path');
 
-module.exports = {
-  target: 'web',
+module.exports = (env, argv) => {
+  const isProd = argv.mode === 'production';
 
-  mode: 'development',
+  return {
+    target: 'web',
+    mode: isProd ? 'production' : 'development',
 
-  entry: {
-    index: path.join(__dirname, 'App/js/index.js'),
-  },
+    devtool: isProd ? 'source-map' : 'eval-source-map',
 
-  output: {
-    path: path.resolve(__dirname, 'public/js'),
-    filename: 'bundle.js',
-  },
+    entry: {
+      index: path.join(__dirname, 'App/js/index.js'),
+    },
 
-  module: {
-    rules: [
-      {
-        test: /\.ts?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
-      }
-    ],
-  },
+    output: {
+      path: path.resolve(__dirname, 'public/js'),
+      filename: 'bundle.js',
+      clean: true,   // neteja el directori de sortida abans de cada build
+    },
+
+    module: {
+      rules: [
+        {
+          test: /\.ts?$/,
+          use: 'ts-loader',
+          exclude: /node_modules/,
+        },
+      ],
+    },
 
     resolve: {
       extensions: ['.ts', '.js'],
     },
   };
+};
