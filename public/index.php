@@ -25,7 +25,7 @@ $contenidor = new \App\Container(__DIR__ . "/../App/config.php");
 
 /* Creem l'aplicació i li afegim el middleware */
 $app = new \Emeset\Emeset($contenidor);
-$app = \App\Routes::routes($app);
+require __DIR__ . '/../App/routes.php';
 
 $app->route(Router::DEFAULT_ROUTE, "ctrlError");
 
