@@ -15,32 +15,33 @@ use \Emeset\Contracts\Container;
  *
  **/
 
-class Login {
-
-/**
- * ctrlLogin: Controlador que carrega  la pàgina de login
- *
- * @param $request contingut de la peticó http.
- * @param $response contingut de la response http.
- * @param array $config  paràmetres de configuració de l'aplicació
- *
- **/
-public function login(Request $request, Response $response, Container $container) :Response
+class Login
 {
-  // Comptem quantes vegades has visitat aquesta pàgina
-  $error = $request->get("SESSION", "error");
+
+  /**
+   * ctrlLogin: Controlador que carrega  la pàgina de login
+   *
+   * @param $request contingut de la peticó http.
+   * @param $response contingut de la response http.
+   * @param array $config  paràmetres de configuració de l'aplicació
+   *
+   **/
+  public function login(Request $request, Response $response, Container $container): Response
+  {
+    // Comptem quantes vegades has visitat aquesta pàgina
+    $error = $request->get("SESSION", "error");
 
 
-  $response->set("error", $error);
-  $response->setSession("error", "");
+    $response->set("error", $error);
+    $response->setSession("error", "");
 
-  $response->SetTemplate("login.php");
+    $response->SetTemplate("login.php");
 
-  return $response;
-}
+    return $response;
+  }
 
-public function validarLogin(Request $request, Response $response, Container $container) :Response
-{
+  public function validarLogin(Request $request, Response $response, Container $container): Response
+  {
     // Comptem quantes vegades has visitat aquesta pàgina
     $usuari = $request->get(INPUT_POST, "usuari");
     $clau = $request->get(INPUT_POST, "clau");
@@ -48,24 +49,23 @@ public function validarLogin(Request $request, Response $response, Container $co
 
 
     if ($usuari === $config["login"]["usuari"] && $clau == $config["login"]["clau"]) {
-        $response->setSession("usuari", $config["login"]["usuari"]);
-        $response->setSession("logat", true);
-        $response->redirect("location: /privat");
+      $response->setSession("usuari", $config["login"]["usuari"]);
+      $response->setSession("logat", true);
+      $response->redirect("location: /privat");
     } else {
-        $response->setSession("error", "Usuari o clau incorrectes!");
-        $response->setSession("logat", false);
-        $response->redirect("location: /login");
+      $response->setSession("error", "Usuari o clau incorrectes!");
+      $response->setSession("logat", false);
+      $response->redirect("location: /login");
     }
 
     return $response;
-}
+  }
 
-public function tancarSessio(Request $request, Response $response, Container $container) :Response
-{
-  $response->setSession("logat", false);
-  $response->redirect("location: /");
+  public function tancarSessio(Request $request, Response $response, Container $container): Response
+  {
+    $response->setSession("logat", false);
+    $response->redirect("location: /");
 
-  return $response;
-}
-
+    return $response;
+  }
 }

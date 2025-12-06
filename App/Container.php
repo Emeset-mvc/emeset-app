@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App;
 
 use Emeset\Container as EmesetContainer;

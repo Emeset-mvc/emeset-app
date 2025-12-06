@@ -21,7 +21,7 @@ use \Emeset\Contracts\Container;
  * @param $container  paràmetres de configuració de l'aplicació
  *
  **/
-function ctrlError(Request $request, Response $response, Container $container) :Response
+function ctrlError(Request $request, Response $response, Container $container): Response
 {
 
   $error = $request->get("SESSION", "error");

@@ -33,7 +33,7 @@ class Privat
      * @param \Emeset\Contracts\Container  $container contenidor de dependències.
      *
      **/
-    public function privat(Request $request, Response $response, Container $container) :Response
+    public function privat(Request $request, Response $response, Container $container): Response
     {
         // Comptem quantes vegades has visitat aquesta pàgina
         $visites = $request->get(INPUT_COOKIE, "visites-privades");
