@@ -19,4 +19,6 @@ $app->get("/hola/{id}", function ($request, $response) {
     $response->setBody("Hola {$id}!");
     return $response;
 });
-return $app;
+
+
+$app->route(\Emeset\Router::DEFAULT_ROUTE, "ctrlError");
