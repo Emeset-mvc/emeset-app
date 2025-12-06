@@ -174,8 +174,8 @@ public function route($id, $callback, $middleware = false);
 Alguns exemples de rutes definides amb l’encaminador.
 
 ```php
-$app->route("", "ctrlPortada"); // el controlador és una funció
-$app->route("login", "\App\Controllers\Login:index"); // el controlador és un mètode d’una classe.
+$app->get("", "ctrlPortada"); // el controlador és una funció
+$app->get("login", "\App\Controllers\Login:index"); // el controlador és un mètode d’una classe.
 ```
 
 ### Encaminador HTTP (\Emeset\Router\RouterHTTP)
@@ -289,7 +289,7 @@ class Privat
 Per definir una ruta amb un controlador que és un mètode d’una classe utilitzarem la següent sintaxi.
 
 ```php
-$app->route("privat", "\App\Controllers\Privat:privat");
+$app->get("privat", "\App\Controllers\Privat:privat");
 ```
 
 Utilitzant controladors definits amb classes ens permet aprofitar dues noves funcionalitats del framework, per una banda, l’autocarrega de classes i per l’altra controlar la injecció de dependències als nostres controladors.
