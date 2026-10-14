@@ -1,50 +1,37 @@
 <?php
+
 require_once __DIR__ . "/vendor/autoload.php";
 
-/*
-Canvi que s'ha de fer al constructor del container per poder fer servir el cli.
-
-        $isCLI = (php_sapi_name() == 'cli');
-        if ($isCLI) {
-            $projectRootPath = getcwd();
-        } else {
-            $projectRootPath = dirname(getcwd());
-        }
-*/
-
 $container = new \Emeset\Container(__DIR__ . "/App/config.php");
+$cli = $container["cli"];
 
-$cli = $container["cli"]; //new App\Cli\Cli($argv, new App\Cli\Parser($argv, new \Garden\Cli\Cli()) , new App\Cli\Output(new \League\CLImate\CLImate()), new \Emeset\Caller($container), $container);
-
-$cli->addCommand("example:cli", function ($args, $output, $container) {
-    $output->warning("Creant la base de dades...");
-    $output->success("Base de dades creada correctament");
-    $output->error("Base de dades creada correctament");
-    $output->table([
-        ["id" => 1, "name" => "Dani"],
-        ["id" => 2, "name" => "Pep"],
-        ["id" => 3, "name" => "Joan"],
-    ]);
-
-    $output->error()->bold()->echo("Hola");
+// Executa l'exemple des diferents tipus de sortida:
+// php emeset.php example:output
+$cli->addCommand("example:output", function ($args, $output, $container): void {
+    $output->info("Exemple de sortides de la CLI");
+    $output->warning("Aquest missatge és un avís.");
+    $output->success("Aquest missatge indica que l'operació ha acabat correctament.");
+    $output->error("Aquest missatge mostra com es presenta un error.");
 
     $output->br();
-    $output->info()->border()->error()->echo("Hola")->success()->border();
-   
-}, "Exemple de les opcions del cli");
+    $output->error()->bold()->echo("Text amb format");
+    $output->info()->border()->echo("Text informatiu amb marc");
+}, "Mostra exemples de missatges i formats de sortida");
 
-$cli->addCommand("example:table", function ($args, $output, $container) {
-    
+// Executa l'exemple de taula:
+// php emeset.php example:table
+$cli->addCommand("example:table", function ($args, $output, $container): void {
     $output->table([
         ["id" => 1, "name" => "Dani"],
         ["id" => 2, "name" => "Pep"],
         ["id" => 3, "name" => "Joan"],
     ]);
+}, "Mostra una taula amb dades d'exemple");
 
-   
-}, "Exemple de com mostrar la informació de la taula especificada");
-
-$cli->addCommand("config:show", [App\Commands\Config::class, "show"], "Mostra la configuració de l'aplicació");
-
+$cli->addCommand(
+    "config:show",
+    [App\Commands\Config::class, "show"],
+    "Mostra la configuració de l'aplicació"
+);
 
 $cli->run();
