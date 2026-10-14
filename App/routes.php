@@ -21,4 +21,4 @@ $app->get("/hola/{id}", function ($request, $response) {
 });
 
 
-$app->route(\Emeset\Router::DEFAULT_ROUTE, "ctrlError");
+$app->route(\Emeset\Contracts\Routers\Router::DEFAULT_ROUTE, "ctrlError");
