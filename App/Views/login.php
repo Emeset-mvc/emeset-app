@@ -11,6 +11,7 @@
   <title>Exemple de portada</title>
 </head>
 
+<<<<<<< HEAD
 <body class="bg-light">
   <div class="container py-5">
 
@@ -22,10 +23,19 @@
 
     <?php if ($error != "") { ?>
       <div class="alert alert-danger text-center" role="alert">
+=======
+<body>
+  <main class="page">
+    <h1 class="page-title">Exemple de controlador del Framework Emeset</h1>
+
+    <?php if ($error != "") { ?>
+      <div class="alert alert--error" role="alert">
+>>>>>>> 00608db (Canvis frontend curs 26/27)
         <?= $error ?>
       </div>
     <?php } ?>
 
+<<<<<<< HEAD
     <div class="row justify-content-center">
       <div class="col-md-4">
         <div class="card shadow-sm">
@@ -60,6 +70,29 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
   <script src="/js/bundle.js"></script>
+=======
+    <div class="login-layout">
+        <section class="login-card">
+          <form class="login-form" action="/validar-login" method="post">
+            <h2 class="login-title">Emeset - Exemple de login</h2>
+            <div>
+              <label for="usuari">Your email</label>
+              <input type="text" name="usuari" id="usuari" class="form-control" placeholder="name@company.com" required>
+            </div>
+            <div>
+              <label for="clau">Your password</label>
+              <input type="password" name="clau" id="clau" placeholder="••••••••" class="form-control" required>
+            </div>
+
+            <button type="submit" class="button button--primary">Hola!</button>
+
+          </form>
+        </section>
+
+    </div>
+  </main>
+  <script type="module" src="/js/bundle.js"></script>
+>>>>>>> 00608db (Canvis frontend curs 26/27)
 </body>
 
 </html>
