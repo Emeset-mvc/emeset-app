@@ -9,6 +9,7 @@
         "source": "https://github.com/Emeset-mvc/emeset-app"
     },
     "require": {
+        "php": ">=8.4",
         "emeset/framework": "^0.5"
     },
 
