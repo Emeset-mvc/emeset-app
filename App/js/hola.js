@@ -1,11 +1,11 @@
+import dayjs from "dayjs";
+import "dayjs/locale/ca";
+
 export default function hola() {
-    console.log('hola hola');
     const message = document.getElementById("missatge");
 
     if (message) {
-        const paragraph = document.createElement("p");
-        paragraph.textContent = "Text afegit amb JavaScript.";
-        message.append(paragraph);
+        message.textContent = `Avui és ${dayjs().locale("ca").format("dddd, D MMMM YYYY")}.`;
     }
 }
 

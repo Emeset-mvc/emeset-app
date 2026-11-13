@@ -9,7 +9,7 @@ use \Emeset\Contracts\Container;
  * Framework d'exemple per a M07 Desenvolupament d'aplicacions web.
  * @author: Dani Prados dprados@cendrassos.net
  *
- * Carrega la portada
+ * Carrega la pàgina d'error
  *
  **/
 
@@ -24,6 +24,7 @@ use \Emeset\Contracts\Container;
 function ctrlError(Request $request, Response $response, Container $container) :Response
 {
 
+  $response->setHeader("HTTP/1.1 404 Not Found");
   $error = $request->get("SESSION", "error");
   $response->set("error", $error);
   $response->SetTemplate("error.php");
