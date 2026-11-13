@@ -614,7 +614,7 @@ $user = $contenidor->get("user");  // Retorna una instància de l’objecte user
 
 # Eines frontend (Tooling)
 
-Emeset és agnòstic respecte a les eines de frontend, però l’aplicació base ve preconfigurada amb TailwindCSS com a framework CSS  i amb Webpack per empaquetar el Javascript i TypeScript.
+Emeset és agnòstic respecte a les eines de frontend. L’aplicació base utilitza CSS propi, Vite per empaquetar els recursos i Vitest per executar els tests.
 
 Per poder utilitzar aquestes eines ens cal tenir instal·lat [node](https://nodejs.org/en/).
 
@@ -626,11 +626,11 @@ $ npm install
 
 Un cop tenim instal·lades les dependències, podem executar les diferents eines.
 
-- npm run build  -> generarà un nous fitxers css i js  pel nostre projecte processant els fitxers /App/css/main.css i /App/js/index.js.
-- npm run watch -> generarà un nous fitxers css i js  pel nostre projecte cada cop que hi hagi un canvi en els fitxers /App/css/main.css i /App/js/index.js.
-- npm run start -> inicia el servidor web a localhost:8080 i executa npm run watch.
-- npm run prod -> com npm run build, però preparà els fitxers per un entorn de producció.
-- npm run test -> executar els testos que trobi, fitxers *.test.js
+- npm run build -> genera `public/main.css` i `public/js/bundle.js` amb Vite.
+- npm run watch -> regenera els fitxers quan canvien els recursos d'entrada.
+- npm run start -> inicia el servidor PHP a localhost:8000 i observa els canvis amb Vite.
+- npm run prod -> genera els fitxers optimitzats per a producció.
+- npm run test -> executa amb Vitest els fitxers `*.test.js`.
 
 Si els fitxers tenen l'extensió .ts seran transpilats de TypeScript a Javascript.
 

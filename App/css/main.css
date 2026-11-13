@@ -1,3 +1,138 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1f2937;
+  background: #f8fafc;
+  font-synthesis: none;
+  line-height: 1.5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+}
+
+.page {
+  width: min(100% - 2rem, 960px);
+  margin: 0 auto;
+  padding: 3rem 0;
+}
+
+.page-title {
+  margin: 0 0 1.5rem;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.2;
+}
+
+.content {
+  margin-top: 2rem;
+}
+
+.alert {
+  margin: 0 0 1.5rem;
+  padding: 1rem;
+  border-radius: 0.375rem;
+}
+
+.alert--error {
+  color: #991b1b;
+  background: #fee2e2;
+}
+
+.button {
+  display: inline-block;
+  margin: 0 0.5rem 0.5rem 0;
+  padding: 0.65rem 1rem;
+  border: 0;
+  border-radius: 0.375rem;
+  color: #fff;
+  background: #c2410c;
+  font: inherit;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:hover,
+.button:focus-visible {
+  background: #9a3412;
+}
+
+.button:focus-visible,
+.form-control:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+.button--primary {
+  background: #1d4ed8;
+}
+
+.button--primary:hover,
+.button--primary:focus-visible {
+  background: #1e40af;
+}
+
+.button--danger {
+  background: #b91c1c;
+}
+
+.button--danger:hover,
+.button--danger:focus-visible {
+  background: #991b1b;
+}
+
+.login-layout {
+  display: grid;
+  place-items: center;
+  margin-top: 2rem;
+}
+
+.login-card {
+  width: min(100%, 400px);
+  padding: 1.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  background: #fff;
+  box-shadow: 0 4px 12px rgb(15 23 42 / 10%);
+}
+
+.login-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.login-title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #9ca3af;
+  border-radius: 0.375rem;
+  color: inherit;
+  background: #fff;
+  font: inherit;
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 2rem 0;
+  }
+
+  .login-card {
+    padding: 1.25rem;
+  }
+}

@@ -1,12 +1,13 @@
-import jQuery from "jquery";
-window.$ = window.jQuery = jQuery;
-
-export  default function hola() {
+export default function hola() {
     console.log('hola hola');
-}
-console.log("Hola 2");
+    const message = document.getElementById("missatge");
 
-$("#missatge").append("<p>Text afegit amb jQuery.</p>");
+    if (message) {
+        const paragraph = document.createElement("p");
+        paragraph.textContent = "Text afegit amb JavaScript.";
+        message.append(paragraph);
+    }
+}
 
 function add(a, b) {
   return a + b;
