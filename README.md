@@ -91,33 +91,19 @@ Un cop instal·lada l’aplicació tenim la següent estructura de carpetes.
 │   ├── Commands
 │   ├── Container.php
 │   ├── Controllers
-<<<<<<< HEAD
 │   ├── Middleware
-│   ├── Models
-│   ├── js
-=======
 │   ├── config.php
 │   ├── css
 │   ├── js
-│   ├── Middleware
->>>>>>> cb0d78a (Canvis frontend curs 26/27 (2))
 │   └── Views
 ├── public
 └── vendor
 ```
 
-<<<<<<< HEAD
-La carpeta App té la major part del codi de l’aplicació. 
-La carpeta Controllers és on desem tots els controladors.
-La carpeta Middleware és on desem les diferents funcions Middleware.
-La carpeta js és on desem els fitxers js abans de processar, cal instal·lar el Webpack per poder-ho fer.
-La carpeta Views és on desem les vistes del projecte.
-=======
 La carpeta `App` conté el codi de l’aplicació: configuració, contenidor, controladors, middleware, vistes, CSS i JavaScript.
 Els fitxers font de CSS i JavaScript es desen a `App/css` i `App/js`. Els canvis que hi fem es processen amb Vite: `App/js/index.js` és el punt d’entrada del JavaScript i importa el CSS de `App/css/main.css`. Vite genera els fitxers compilats `public/js/bundle.js` i `public/main.css`, que són els que carrega el navegador. Per regenerar-los manualment, executem `npm run build`; amb `npm run watch`, es regeneren quan canvien els fitxers font.
 El fitxer `App/js/hola.js` mostra com importar Day.js per donar format a la data actual en català.
-La carpeta `public` és l’arrel pública del servidor i conté el front controller `index.php`, el router `router.php` i els recursos compilats.
->>>>>>> cb0d78a (Canvis frontend curs 26/27 (2))
+La carpeta `public` és l’arrel pública del servidor i conté el front controller `index.php` i els recursos compilats.
 
 
 ## Configuració
@@ -625,11 +611,7 @@ $user = $contenidor->get("user");  // Retorna una instància de l’objecte user
 
 # Eines frontend (Tooling)
 
-<<<<<<< HEAD
-Emeset és agnòstic respecte a les eines de frontend, però l’aplicació base ve preconfigurada amb Bootstrap amb CDN  i amb Webpack per empaquetar el Javascript i TypeScript.
-=======
 Emeset és agnòstic respecte a les eines de frontend. L’aplicació base utilitza CSS propi, Vite per empaquetar els recursos i Vitest per executar els tests.
->>>>>>> 00608db (Canvis frontend curs 26/27)
 
 Per poder utilitzar aquestes eines ens cal tenir instal·lat [node](https://nodejs.org/en/).
 

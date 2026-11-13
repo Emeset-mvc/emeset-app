@@ -1,57 +1,18 @@
 <!doctype html>
 <html lang="ca">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <link rel="stylesheet" href="/main.css">
-
   <title>Exemple de zona privada</title>
 </head>
-
 <body>
-<<<<<<< HEAD
-  <div class="container py-5">
-
-    <div class="row">
-      <div class="col">
-        <h1 class="fw-bold mb-4">Exemple de zona privada del Framework Emeset</h1>
-
-        <a href="/" class="btn btn-warning me-2 mb-2">
-          Accedeix a la zona pública
-        </a>
-
-        <a href="/tancar-sessio" class="btn btn-danger mb-2">
-          Tanca la sessió de <?= $usuari ?>
-        </a>
-      </div>
-    </div>
-
-    <div class="row mt-4">
-      <div class="col">
-        <p><?= $missatge ?></p>
-      </div>
-    </div>
-
-  </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  <script src="/js/bundle.js"></script>
-=======
   <main class="page">
-        <h1 class="page-title">Exemple de zona privada del Framework Emeset</h1>
-
-        <a href="/" class="button">Accedeix a la zona pública</a>
-
-        <a href="/tancar-sessio" class="button button--danger">Tanca la sessió de <?= $usuari ?></a>
-
-    <div class="content">
-      <p><?= $missatge  ?></p>
-    </div>
+    <h1 class="page-title">Exemple de zona privada del Framework Emeset</h1>
+    <a href="/" class="button">Accedeix a la zona pública</a>
+    <a href="/tancar-sessio" class="button button--danger">Tanca la sessió de <?= $usuari ?></a>
+    <div class="content"><p><?= $missatge ?></p></div>
   </main>
-  <script type="module" src="/js/bundle.js"></script>
->>>>>>> 00608db (Canvis frontend curs 26/27)
+  <script src="/js/bundle.js" defer></script>
 </body>
-
 </html>

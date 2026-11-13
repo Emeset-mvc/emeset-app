@@ -13,7 +13,7 @@
   "scripts": {
     "build": "vite build",
     "watch": "vite build --watch",
-    "serve": "cd public && php -S localhost:8000 router.php",
+    "serve": "cd public && php -S localhost:8000",
     "start": "npm-run-all -p watch serve",
     "prod": "vite build",
     "test": "vitest run",
