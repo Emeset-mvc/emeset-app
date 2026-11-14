@@ -29,7 +29,7 @@ $contenidor = new \Emeset\Container([]);
 
 $app = new \Emeset\Emeset($contenidor);
 
-$app->route("", function($request, $response, $container){
+$app->route("", function(\Emeset\Contracts\Http\Request $request, \Emeset\Contracts\Http\Response $response, \Emeset\Contracts\Container $container): \Emeset\Contracts\Http\Response {
     $response->setBody("Hola món!");
     return $response;
 });
@@ -57,7 +57,7 @@ $app = new \Emeset\Emeset($contenidor);
 Per inicialitzar l’aplicació creem un objecte Emeset, passem com paràmetre un contenidor, l’aplicació el necessitarà per obtenir els diferents objectes amb els que treballarà.
 
 ```php
-$app->route("", function($request, $response, $container){
+$app->route("", function(\Emeset\Contracts\Http\Request $request, \Emeset\Contracts\Http\Response $response, \Emeset\Contracts\Container $container): \Emeset\Contracts\Http\Response {
     $response->setBody("Hola món!");
     return $response;
 });
@@ -108,9 +108,9 @@ La carpeta `public` és l’arrel pública del servidor i conté el front contro
 
 ## Configuració
 
-Quan inicialitzem el framework carrega el fitxer de configuració /App/config.php dins del contenidor.
+El contenidor rep la configuració en construir-lo. En aquest projecte, el punt d'entrada li passa `App/config.php`.
 
-Així podem accedir als paràmetres de configuració amb $contenidor["config"] en qualsevol punt de l'aplicació.
+Així podem accedir als paràmetres de configuració amb `$contenidor->get("config")` o `$contenidor["config"]`.
 
 ```php
 <?php
@@ -147,36 +147,9 @@ login_clau = "Una altra clau"
 
 ## Router (Encaminador)
 
-L’encaminador és el responsable de decidir quin controlador s’ha d’executar en funció de la petició rebuda. El framework incorpora dos encaminadors diferents:
+L’encaminador és el responsable de decidir quin controlador s’ha d’executar en funció de la petició rebuda. Emeset incorpora `RouterHttp` com a encaminador per defecte. També conserva `RouterParam` per compatibilitat amb EmesetLite.
 
-\Emeset\Router\RouterParam
-\Emeset\Router\RouterHttp
-
-El RouterParam funciona fent servir el paràmetre r, que pot rebre per GET o POST. En funció del valor que tingui r escollirà quin controlador s’ha d’executar.
-
-El RouterHTTP fa servir el mètode HTTP i l’URL de la petició per determinar quin controlador s’executa. En el servidor cal tenir activat el mod_rewrite.
-
-### Encaminador per paràmetre (\Emeset\Router\RouterParam)
-L’encaminador determina quin controlador s’ha d’executar a partir del paràmetre r. 
-
-Els mètodes per definir rutes accepten tres paràmetres.
-$id: Cadena que identifica la ruta.
-$callback: funció o mètode del controlador.
-$middleware: funció o array de funcions de middleware. Aquest paràmetre és opcional.
-
-```php
-// Aquest mètode permet definir una ruta i vincular-hi un controlador i el middleware que li pertoqui. 
-public function route($id, $callback, $middleware = false);
-```
-
-Alguns exemples de rutes definides amb l’encaminador.
-
-```php
-$app->get("", "ctrlPortada"); // el controlador és una funció
-$app->get("login", "\App\Controllers\Login:index"); // el controlador és un mètode d’una classe.
-```
-
-### Encaminador HTTP (\Emeset\Router\RouterHTTP)
+### Encaminador HTTP (\Emeset\Routers\RouterHttp)
 
 Aquest encaminador utilitza la llibreria d’encaminament [FastRoute](https://github.com/nikic/FastRoute#readme). Amb aquest encaminador farem servir el mètode HTTP i el path de la petició per determinar quin controlador s’ha d’executar.
 
@@ -188,12 +161,12 @@ $middleware: funció o array de funcions de middleware. Aquest paràmetre és op
 
 ```php
 // Aquest mètode serveix per mantenir la compatibilitat amb el RouterParam, defineix la mateixa ruta per les peticions GET i POST. 
-public function route($id, $callback, $middleware = false);
-public function get($id, $callback, $middleware = false);
-public function post($id, $callback, $middleware = false);
-public function put($id, $callback, $middleware = false);
-public function delete($id, $callback, $middleware = false);
-public function head($id, $callback, $middleware = false);
+public function route(string|int $id, mixed $callback, mixed $middleware = false): void;
+public function get(string|int $id, mixed $callback, mixed $middleware = false): void;
+public function post(string|int $id, mixed $callback, mixed $middleware = false): void;
+public function put(string|int $id, mixed $callback, mixed $middleware = false): void;
+public function delete(string|int $id, mixed $callback, mixed $middleware = false): void;
+public function head(string|int $id, mixed $callback, mixed $middleware = false): void;
 ```
 
 #### Les rutes
@@ -203,7 +176,7 @@ Amb l’encaminador HTTP podem passar informació fent servir el path de la ruta
 Per exemple podem definir una ruta que saludi pel nom.
 
 ```php
-$app->get("/hola/{id}", function ($request, $response) {
+$app->get("/hola/{id}", function (\Emeset\Contracts\Http\Request $request, \Emeset\Contracts\Http\Response $response, \Emeset\Contracts\Container $container): \Emeset\Contracts\Http\Response {
     $id = $request->getParam("id");
     $response->setBody("Hola {$id}!");
     return $response;
@@ -218,16 +191,46 @@ obtindrem:
 
 Aquí pots trobar la documentació de com podem definir rutes amb paràmetres. (Defining routes)[https://github.com/nikic/FastRoute#defining-routes].
 
+### Encaminador per paràmetre (\Emeset\Routers\RouterParam)
+
+Aquest encaminador conserva el comportament d’EmesetLite: decideix quin controlador executar a partir del paràmetre `r` de `$_REQUEST`. El contenidor base instal·la `RouterHttp`; per utilitzar `RouterParam`, cal substituir el servei `router` en un contenidor propi:
+
+```php
+namespace App;
+
+use Emeset\Container as EmesetContainer;
+use Emeset\Routers\RouterParam;
+
+class Container extends EmesetContainer
+{
+    public function __construct(array|string $config)
+    {
+        parent::__construct($config);
+
+        $this["router"] = function (EmesetContainer $container): RouterParam {
+            return new RouterParam($container, $container["config"]);
+        };
+    }
+}
+```
+
+Les rutes es defineixen amb els mateixos arguments que amb `RouterHttp`:
+
+```php
+$app->get("", "ctrlPortada"); // el controlador és una funció
+$app->get("login", "\App\Controllers\Login:index"); // el controlador és un mètode d’una classe
+```
+
 ## Controladors
 
-El controlador ha de ser un element “callable” que ha de tenir com a paràmetres d’entrada un objecte \Emeset\Request, un objecte \Emeset\Response i un objecte \Emeset\Container i ha de retornar com a resultat un objecte \Emeset\Response.
+El controlador ha de ser un element “callable” que rep objectes que implementen `\Emeset\Contracts\Http\Request`, `\Emeset\Contracts\Http\Response` i `\Emeset\Contracts\Container`, i retorna una resposta que implementa `\Emeset\Contracts\Http\Response`.
 
 Així els controladors reben tota la informació de la petició HTTP encapsulada en l'objecte petició, tracten aquesta informació, accedeixen a la informació que els cal utilitzant els diferents models i escriuen la informació de sortida a l'objecte resposta.
 
 Els controladors no han d'accedir directament a la informació, d'això s'encarreguen els models, ni han de generar cap sortida, d'això s'encarrega la resposta. La seva responsabilitat és crear una resposta en funció de la informació d'entrada fent servir els models per accedir a les dades de l'aplicació.
 
 ```php
-function ctrlIndex($request, $response, $container){
+function ctrlIndex(\Emeset\Contracts\Http\Request $request, \Emeset\Contracts\Http\Response $response, \Emeset\Contracts\Container $container): \Emeset\Contracts\Http\Response {
 
     $response->setTemplate("index.php");
 
@@ -254,12 +257,14 @@ Podem fer servir els mètodes d'una classe com a controladors, això ens permet 
 
 namespace App\Controllers;
 
+use \Emeset\Contracts\Container;
+
 class Privat
 {
 
-    public $contenidor;
+    public Container $contenidor;
 
-    public function __construct($contenidor)
+    public function __construct(Container $contenidor)
     {
         $this->contenidor = $contenidor;
     }
@@ -272,7 +277,7 @@ class Privat
      * @param \Emeset\Container  $container contenidor de dependències.
      *
      **/
-    public function privat($request, $response, $container)
+    public function privat(\Emeset\Contracts\Http\Request $request, \Emeset\Contracts\Http\Response $response, \Emeset\Contracts\Container $container): \Emeset\Contracts\Http\Response
     {
         $missatge = "Benvingut a la zona privada!";
         
@@ -299,17 +304,19 @@ Amb PHP podem definir funcions que s'executaran si intentemt instanciar una clas
 Però com estem fent servir composer,  tot plegat és encara més senzill. En el fitxer composer.json podem definir un esquema d’autocarrega i el mateix composer ens generarà un "autoloader" per el nostre projecte.
 
 ```json
-   "autoload": {
+{
+  "autoload": {
         "psr-4": {"App\\": "App/"}
     }
+}
 ```
 
 Amb aquest bloc estem indicant a composer que volem fer servir un esquema d’autocarrega [PSR-4](https://www.php-fig.org/psr/psr-4/). Amb aquest esquema si tenim el següent codi:
 
 ```php
-$privat = new \App\Controller\Privat($container);
+$privat = new \App\Controllers\Privat($contenidor);
 ```
-Si la classe \App\Controller\Privat no està definida el mecanisme d’autocarrega del Composer la buscarà al fitxer Privat.php de la carpeta ./App/Controller/.
+Si la classe `\App\Controllers\Privat` no està definida, Composer la buscarà al fitxer `App/Controllers/Privat.php`.
 
 Així que seguint la convenció de nomenclatura PSR-4 ens podem oblidar d’estar escrivint un include per cada controlador que fem servir, sempre que els definim com a classes seguint la nomenclatura establerta per la convenció PSR-4.
 
@@ -332,13 +339,12 @@ use Emeset\Container as EmesetContainer;
 
 class Container extends EmesetContainer {
 
-    public function __construct($config){
+    public function __construct(array|string $config){
         parent::__construct($config);
         
-        $this["\App\Controllers\Privat"] = function ($c) {
+        $this["\App\Controllers\Privat"] = function (EmesetContainer $c): \App\Controllers\Privat {
             // Aqui podem inicialitzar totes les dependències del controlador i passar-les com a paràmetre.
-	        $usuaris = $c->get("usuaris");
-            return new \App\Controllers\Privat($usuaris);
+            return new \App\Controllers\Privat($c);
         };
     }
 }
@@ -352,35 +358,37 @@ Les funcions middleware embolcallent els controladors, això ens permet executar
 Les funcions middleware tenen quatre paràmetres.
 
 ```php
-function auth($request, $response, $container, $next)
+function auth(\Emeset\Contracts\Http\Request $request, \Emeset\Contracts\Http\Response $response, \Emeset\Contracts\Container $container, mixed $next): \Emeset\Contracts\Http\Response
 ```
-$request:  Objecte de tipus \Emeset\Http\Request
-$response: Objecte de tipus \Emeset\Http\Response
-$container: Objecte de tipus \Emeset\Container
-$next: Callable del següent middleware o controlador.
+$request:  Objecte que implementa \Emeset\Contracts\Http\Request
+$response: Objecte que implementa \Emeset\Contracts\Http\Response
+$container: Objecte que implementa \Emeset\Contracts\Container
+$next: següent controlador o llista de middleware/controladors que queden per executar.
 
 Exemple de middleware
 ```php
-function test($request, $response, $config, $next)
+function test(\Emeset\Contracts\Http\Request $request, \Emeset\Contracts\Http\Response $response, \Emeset\Contracts\Container $container, mixed $next): \Emeset\Contracts\Http\Response
 {
 
     // aquí podem executar codi abans de cridar el següent middleware o el controlador
-    $response = nextMiddleware($request, $response, $config, $next); // Aquí cridem al següent middleware o el controlador.
+    $response = \Emeset\Middleware::next($request, $response, $container, $next); // Aquí cridem al següent middleware o el controlador.
      // aquí podem executar codi després de cridar el següent middleware o el controlador	
     return $response;
 }
 ```
 
-La funció nexMiddleware gestiona quin és el següent element en la llista d'execució de la ruta actual, és el que ens permet afegir més d'una middleware en una ruta.
+El mètode `Emeset\Middleware::next` gestiona quin és el següent element en la llista d'execució de la ruta actual. Això permet encadenar diversos middleware en una ruta.
+
+La funció global `nextMiddleware()` encara existeix per compatibilitat, però està marcada com a obsoleta i es retirarà a la versió 1.0; als exemples nous fem servir `Emeset\Middleware::next()`.
 
 ```php
-function nextMiddleware($request, $response, $container, $next)
+public static function next(\Emeset\Contracts\Http\Request $request, \Emeset\Contracts\Http\Response $response, \Emeset\Contracts\Container $container, mixed $next): \Emeset\Contracts\Http\Response
 ```
 
-- $request:  Objecte de tipus \Emeset\Http\Request
-- $response: Objecte de tipus \Emeset\Http\Response
-- $container: Objecte de tipus \Emeset\Container
-- $next: Callable del següent middleware o controlador.
+- $request:  Objecte que implementa \Emeset\Contracts\Http\Request
+- $response: Objecte que implementa \Emeset\Contracts\Http\Response
+- $container: Objecte que implementa \Emeset\Contracts\Container
+- $next: següent controlador o llista de middleware/controladors que queden per executar.
 
 ### Com utilitzar el middleware?
 
@@ -404,9 +412,10 @@ $app->get("privat", [\App\Controllers\Privat::class, "privat"], ["auth", "isAdmi
 
 Per aprofitar les funcions d'autoload podem utilitzar classes per definir middlewares
 
+
 ```php
 $app->get("privat", [\App\Controllers\Privat::class, "privat"], [[\App\Middleware\App::class, "auth"]]);
-$app->get("privat", [\App\Controllers\Privat::class, "privat"], [[\App\Middleware\App::class, "auth"], [\App\Middleware\App::class, "isAdmin"]]);
+$app->get("privat", [\App\Controllers\Privat::class, "privat/admin"], [[\App\Middleware\App::class, "auth"], [\App\Middleware\App::class, "isAdmin"]]);
 ```
 
 ### Middleware global de l'aplicació
@@ -427,22 +436,22 @@ Un objecte de la classe \Emeset\Http\Request encapsula tota la petició HTTP.
 
 ```php
 
-// obtindrà el paràmetre r de la petició GET i escaparà els caràcters especials.
+// Obtindrà el paràmetre r de GET i escaparà els caràcters especials.
 $r = $request->get(INPUT_GET, "r");  
 
-// obtindrà el paràmetre r de la petició POST i escaparà els caràcters especials.
+// Obtindrà el paràmetre r de POST i escaparà els caràcters especials.
 $r = $request->get(INPUT_POST, "r"); 
 
-// obtindrà el paràmetre r de la petició GET.
-$r = $request->getRaw(INPUT_COOKIES, "r");  
+// Obtindrà la cookie r sense filtrar.
+$r = $request->getRaw(INPUT_COOKIE, "r");
 
-// obtindrà el paràmetre r de la sessió i escaparà els caràcters especials.
+// Obtindrà el valor de sessió r. Les dades de sessió no s'escapen automàticament.
 $r = $request->get("SESSION", "r"); 
 
-// obtindrà el paràmetre file de la petició $_FILES.
+// Obtindrà el fitxer file de $_FILES.
 $r = $request->get("FILES", "file"); 
 
-// obtindrà el paràmetre r de la sessió i escaparà els caràcters especials.
+// Obtindrà el paràmetre r de $_REQUEST.
 $r = $request->get("INPUT_REQUEST", "r"); 
 
 //Si no volem escapar els caràcters especials podem utilitzar el mètode getRaw();
@@ -458,11 +467,7 @@ Un objecte de la classe \Emeset\Http\Response encapsula tota la resposta HTTP.
 
 La resposta encapsula la resposta HTTP, això inclou les cookies, redireccions, capçaleres i variables de sessió (encara que no formin part realment de la resposta HTTP).
 
-```php
-// Quan instanciem la classe resposta podem definir en quina carpeta 
-// estan les plantilles, per defecte busca a ../src/views/
-$response = new \Emeset\Response("../src/vistes");
-```
+El contenidor crea la resposta i la vista per defecte. La classe `\Emeset\Http\Response` rep un objecte `\Emeset\Contracts\Views\Views` al constructor. La vista PHP per defecte cerca plantilles a `../App/Views/`.
 
 El mètode set ens permet injectar informació a la vista i el mètode setTemplate ens permet definir quina plantilla volem utilitzar per la vista.
 
@@ -510,7 +515,7 @@ La resposta ens permet desar informació a la sessió, el PHP ens permet fer-ho 
 $response->setSession("error", "Missatge d'error");  
 ```
 
-Si volem esborrar un valor de la sessió podem utilitzar el mètode unseSession($name)
+Si volem esborrar un valor de la sessió podem utilitzar el mètode `unsetSession($id)`.
 
 ```php
 // Esborrarà l'entrade error de la sessió
@@ -523,7 +528,7 @@ $response->unsetSession("error");
 El métode setCookie()  mapeja la petició a la funció [setcookie](https://www.php.net/manual/es/function.setcookie.php) de PHP amb els mateixos paràmetres.
 
 ```php
-public function setCookie($name, $value = "", $expire = 0, $path = "", $domain = "", $secure = false, $httponly = false)
+public function setCookie(string $name, string $value = "", int $expire = 0, string $path = "", string $domain = "", bool $secure = false, bool $httponly = false): void
 ```
 
 Per exemple:
@@ -533,12 +538,12 @@ $response->setCookie("contador", $contador);
 
 ### Resposta en format JSON
 
-Si volem generar una resposta en format JSON podem utilitzar el mètode setJson() així la resposta codificarà a format JSON tota la informació que hem afegit.
+Si volem generar una resposta en format JSON podem utilitzar el mètode `setJSON()`. Per defecte la resposta codifica tots els valors afegits amb `set()`.
 
 ```php
 // Generarà la sortida en format JSON.
 $response->set("result","ok" ); 
-$response->setJson();  
+$response->setJSON();
 ```
 La sortida seria
 ```json
@@ -555,12 +560,12 @@ $response->setBody("Hola món!");
 
 
 # Contenidor (Container)
-El contenidor gestiona les dependències del projecte. Per implementar-lo utilitzem el contenidor Pimple del projecte Symfony. El que fem és estendre el contenidor i definir les dependències de base d’un projecte Emeset.
+El contenidor gestiona les dependències del projecte. Emeset estén Pimple i hi registra els serveis bàsics que necessita l'aplicació.
 
 Per defecte el contenidor ja té definit com instanciar els diferents objectes necessaris per fer funcionar l’aplicació mínima.
 
 ```php
-$contenidor->config  // recuperem la configuració
+$config = $contenidor->get("config"); // recuperem la configuració
 $request = $contenidor->get("request"); // Retorna una instància de l’objecte request.
 ```
 
@@ -577,18 +582,18 @@ use Emeset\Container as EmesetContainer;
 
 class Container extends EmesetContainer {
 
-    public function __construct($config){
+    public function __construct(array|string $config){
         parent::__construct($config);
 
         /* Podem definir com s’han d’instanciar els diferents models. */
         $this["user"] = function ($c) {
             return new \App\Model\User($c->get("db"));
         };
-        
+
         /* Si definim una entrada per la classe d’un controlador s’utilitzarà aquest codi
            per instanciar-la, això ens permet gestionar les depedències específiques de
            cada controlador. */
-        $this["\App\Controllers\Privat"] = function ($c) {
+        $this["\App\Controllers\Privat"] = function (EmesetContainer $c): \App\Controllers\Privat {
             // Aqui podem inicialitzar totes les dependències del controlador i passar-les com a paràmetre.
             return new \App\Controllers\Privat($c);
         };
