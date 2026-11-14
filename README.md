@@ -632,7 +632,8 @@ Un cop tenim instal·lades les dependències, podem executar les diferents eines
 - npm run watch -> regenera els fitxers quan canvien els recursos d'entrada.
 - npm run start -> inicia el servidor PHP a localhost:8000 i observa els canvis amb Vite.
 - npm run prod -> genera els fitxers optimitzats per a producció.
-- npm run test -> executa amb Vitest els fitxers `*.test.js`.
+- npm run test -> executa amb Vitest els fitxers de prova `*.test.js`.
+- npm run test:watch -> executa Vitest i torna a provar els fitxers quan detecta canvis.
 
 Si els fitxers tenen l'extensió .ts seran transpilats de TypeScript a Javascript.
 

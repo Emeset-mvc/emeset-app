@@ -1,3 +1,4 @@
+import { describe, test, expect } from "vitest";
 import {add, resta} from "../utils/math.js";
 
 describe('Addition', () => {
